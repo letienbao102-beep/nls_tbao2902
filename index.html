@@ -7,7 +7,7 @@
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap&subset=vietnamese,latin" rel="stylesheet">
   <script>
     tailwind.config = {
       theme: {
@@ -58,11 +58,12 @@
       --base-font-size: 16px;
     }
 
-    html, body, button, input, select, textarea {
-      font-family: 'Be Vietnam Pro', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    *, *::before, *::after, html, body, button, input, select, option, textarea {
+      font-family: 'Be Vietnam Pro', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', Arial, sans-serif !important;
       text-rendering: optimizeLegibility;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
+      font-synthesis: weight style;
     }
     html {
       font-size: var(--base-font-size);
@@ -123,30 +124,63 @@
       }
     }
 
+    /* 3D Liquid Glass Card Spatial Swing (Zero Z-Plane Clipping) */
     .slide-next-anim {
-      animation: slideFromRight 0.24s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+      transform-origin: center center;
+      animation: slideFromRight3D 0.44s cubic-bezier(0.22, 1, 0.36, 1) forwards;
     }
-    @keyframes slideFromRight {
-      from { opacity: 0; transform: translate3d(18px, 0, 0); }
-      to { opacity: 1; transform: translate3d(0, 0, 0); }
+    @keyframes slideFromRight3D {
+      0% {
+        opacity: 0;
+        transform: perspective(1200px) translate3d(34px, 4px, 0) rotateY(-8deg) rotateX(2deg) scale(0.968);
+      }
+      65% {
+        opacity: 1;
+        transform: perspective(1200px) translate3d(-2px, -1px, 0) rotateY(1.2deg) rotateX(-0.4deg) scale(1.004);
+      }
+      100% {
+        opacity: 1;
+        transform: perspective(1200px) translate3d(0, 0, 0) rotateY(0deg) rotateX(0deg) scale(1);
+      }
     }
 
     .slide-prev-anim {
-      animation: slideFromLeft 0.24s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+      transform-origin: center center;
+      animation: slideFromLeft3D 0.44s cubic-bezier(0.22, 1, 0.36, 1) forwards;
     }
-    @keyframes slideFromLeft {
-      from { opacity: 0; transform: translate3d(-18px, 0, 0); }
-      to { opacity: 1; transform: translate3d(0, 0, 0); }
+    @keyframes slideFromLeft3D {
+      0% {
+        opacity: 0;
+        transform: perspective(1200px) translate3d(-34px, 4px, 0) rotateY(8deg) rotateX(2deg) scale(0.968);
+      }
+      65% {
+        opacity: 1;
+        transform: perspective(1200px) translate3d(2px, -1px, 0) rotateY(-1.2deg) rotateX(-0.4deg) scale(1.004);
+      }
+      100% {
+        opacity: 1;
+        transform: perspective(1200px) translate3d(0, 0, 0) rotateY(0deg) rotateX(0deg) scale(1);
+      }
     }
 
-    /* Staggered Option Entrance */
-    .stagger-opt-0 { animation: optEntrance 0.22s cubic-bezier(0.22, 1, 0.36, 1) 0.02s both; }
-    .stagger-opt-1 { animation: optEntrance 0.22s cubic-bezier(0.22, 1, 0.36, 1) 0.05s both; }
-    .stagger-opt-2 { animation: optEntrance 0.22s cubic-bezier(0.22, 1, 0.36, 1) 0.08s both; }
-    .stagger-opt-3 { animation: optEntrance 0.22s cubic-bezier(0.22, 1, 0.36, 1) 0.11s both; }
-    @keyframes optEntrance {
-      from { opacity: 0; transform: translate3d(0, 8px, 0); }
-      to { opacity: 1; transform: translate3d(0, 0, 0); }
+    /* 3D Staggered Option Cascade (Zero Z-Plane Clipping) */
+    .stagger-opt-0 { animation: optEntrance3D 0.34s cubic-bezier(0.22, 1, 0.36, 1) 0.01s both; }
+    .stagger-opt-1 { animation: optEntrance3D 0.34s cubic-bezier(0.22, 1, 0.36, 1) 0.04s both; }
+    .stagger-opt-2 { animation: optEntrance3D 0.34s cubic-bezier(0.22, 1, 0.36, 1) 0.07s both; }
+    .stagger-opt-3 { animation: optEntrance3D 0.34s cubic-bezier(0.22, 1, 0.36, 1) 0.10s both; }
+    @keyframes optEntrance3D {
+      0% {
+        opacity: 0;
+        transform: perspective(900px) translate3d(0, 10px, 0) rotateX(-6deg) scale(0.98);
+      }
+      70% {
+        opacity: 1;
+        transform: perspective(900px) translate3d(0, -1px, 0) rotateX(0.8deg) scale(1.003);
+      }
+      100% {
+        opacity: 1;
+        transform: perspective(900px) translate3d(0, 0, 0) rotateX(0deg) scale(1);
+      }
     }
 
     /* Tactile Feedback on Correct / Wrong Choice */
@@ -358,32 +392,110 @@
       transform: scale(0.95);
     }
 
-    /* Liquid Glass View Morph Transition */
-    .liquid-view-enter-right {
-      animation: liquidMorphRight 0.44s var(--spring-fluid) forwards;
+    /* 3D Stage Container for Main Views */
+    main {
+      perspective: 1400px;
     }
-    @keyframes liquidMorphRight {
+
+    /* 3D Liquid Glass View Morph Transition (Zero Z-Plane Slicing on Desktop & Mobile) */
+    .liquid-view-enter-right {
+      transform-origin: center top;
+      animation: liquidMorphRight3D 0.48s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+    @keyframes liquidMorphRight3D {
       0% {
         opacity: 0;
-        transform: translate3d(26px, 6px, 0) scale(0.985);
+        transform: perspective(1400px) translate3d(38px, 8px, 0) rotateY(-7deg) rotateX(2deg) scale(0.965);
+      }
+      65% {
+        opacity: 1;
+        transform: perspective(1400px) translate3d(-3px, -1px, 0) rotateY(1deg) rotateX(-0.4deg) scale(1.005);
       }
       100% {
         opacity: 1;
-        transform: translate3d(0, 0, 0) scale(1);
+        transform: perspective(1400px) translate3d(0, 0, 0) rotateY(0deg) rotateX(0deg) scale(1);
       }
     }
 
     .liquid-view-enter-left {
-      animation: liquidMorphLeft 0.44s var(--spring-fluid) forwards;
+      transform-origin: center top;
+      animation: liquidMorphLeft3D 0.48s cubic-bezier(0.22, 1, 0.36, 1) forwards;
     }
-    @keyframes liquidMorphLeft {
+    @keyframes liquidMorphLeft3D {
       0% {
         opacity: 0;
-        transform: translate3d(-26px, 6px, 0) scale(0.985);
+        transform: perspective(1400px) translate3d(-38px, 8px, 0) rotateY(7deg) rotateX(2deg) scale(0.965);
+      }
+      65% {
+        opacity: 1;
+        transform: perspective(1400px) translate3d(3px, -1px, 0) rotateY(-1deg) rotateX(-0.4deg) scale(1.005);
       }
       100% {
         opacity: 1;
-        transform: translate3d(0, 0, 0) scale(1);
+        transform: perspective(1400px) translate3d(0, 0, 0) rotateY(0deg) rotateX(0deg) scale(1);
+      }
+    }
+
+    /* 3D Interactive Liquid Glass Card Surface & Dynamic Specular Glint */
+    .smooth-card {
+      position: relative;
+      will-change: transform;
+      box-shadow: 0 14px 34px -8px rgba(27, 67, 48, 0.12),
+                  0 2px 6px rgba(27, 67, 48, 0.05),
+                  inset 0 1.5px 2px 0 rgba(255, 255, 255, 0.92),
+                  inset 0 -1px 1px 0 rgba(216, 203, 184, 0.45);
+    }
+    .smooth-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      pointer-events: none;
+      background: radial-gradient(
+        420px circle at var(--glint-x, 50%) var(--glint-y, 0%),
+        rgba(255, 255, 255, 0.55) 0%,
+        rgba(255, 255, 255, 0.12) 35%,
+        transparent 70%
+      );
+      opacity: var(--glint-opacity, 0.35);
+      transition: opacity 0.35s ease;
+      z-index: 0;
+    }
+    .smooth-card > * {
+      position: relative;
+      z-index: 1;
+    }
+    body.low-spec-mode .smooth-card::before {
+      display: none !important;
+    }
+
+    /* 3D Option Button Elevation & Touch Press Physics */
+    .option-btn {
+      transition: transform 0.32s cubic-bezier(0.34, 1.56, 0.64, 1),
+                  box-shadow 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+                  background-color 0.2s ease,
+                  border-color 0.2s ease !important;
+    }
+    .option-btn:hover:not(:disabled) {
+      transform: perspective(800px) translate3d(4px, -2px, 0) rotateX(1.2deg) !important;
+      box-shadow: 0 10px 22px -6px rgba(27, 67, 48, 0.15), inset 0 1px 2px rgba(255, 255, 255, 0.9);
+    }
+    .option-btn:active:not(:disabled) {
+      transform: perspective(800px) translate3d(0, 1px, 0) scale(0.98) !important;
+    }
+
+    /* 3D Pop Modal Entrance */
+    .pop-scale {
+      animation: popScale3D 0.38s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+    @keyframes popScale3D {
+      0% {
+        opacity: 0;
+        transform: perspective(1000px) translate3d(0, 14px, 0) rotateX(-6deg) scale(0.94);
+      }
+      100% {
+        opacity: 1;
+        transform: perspective(1000px) translate3d(0, 0, 0) rotateX(0deg) scale(1);
       }
     }
 
@@ -496,21 +608,28 @@
 
     
     /* ==================== INTERACTIVE LIQUID GLASS DRAG DROPLET (DESKTOP & MOBILE) ==================== */
+    .liquid-nav-track {
+      perspective: 800px;
+    }
     #liquid-nav-pill {
       position: absolute;
       top: 4px;
       bottom: 4px;
       left: 0;
       width: 0;
-      border-radius: 0.7rem;
-      background: linear-gradient(135deg, rgba(252, 247, 238, 0.96) 0%, rgba(232, 218, 196, 0.92) 100%);
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.24), inset 0 1px 2px rgba(255, 255, 255, 0.98);
-      transition: transform 0.48s cubic-bezier(0.32, 1.42, 0.54, 1),
-                  width 0.42s cubic-bezier(0.22, 1, 0.36, 1),
+      border-radius: 0.75rem;
+      background: linear-gradient(135deg, rgba(255, 252, 246, 0.97) 0%, rgba(232, 217, 194, 0.91) 100%);
+      box-shadow: 0 8px 20px -2px rgba(0, 0, 0, 0.32),
+                  0 0 12px rgba(255, 248, 231, 0.28),
+                  inset 0 2px 3px rgba(255, 255, 255, 1),
+                  inset 0 -1px 2px rgba(180, 152, 118, 0.45);
+      transition: transform 0.52s cubic-bezier(0.28, 1.38, 0.52, 1),
+                  width 0.44s cubic-bezier(0.22, 1, 0.36, 1),
                   box-shadow 0.28s ease,
                   background 0.28s ease;
       pointer-events: none;
       z-index: 0;
+      transform-style: preserve-3d;
       will-change: transform, width;
     }
 
@@ -570,6 +689,219 @@
     .no-scrollbar {
       -ms-overflow-style: none;
       scrollbar-width: none;
+    }
+
+    
+    /* ==================== IPHONE LIQUID GLASS POPOVER MENU & INTERACTIVE BLOCKS ==================== */
+    .lg-select-trigger {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      width: 100%;
+      text-align: left;
+      border-radius: 0.9rem;
+      background: linear-gradient(145deg, rgba(255, 253, 249, 0.92) 0%, rgba(244, 236, 223, 0.85) 100%);
+      border: 1px solid rgba(198, 180, 156, 0.9);
+      box-shadow: 0 4px 12px -2px rgba(27, 67, 48, 0.07),
+                  inset 0 1.5px 2px rgba(255, 255, 255, 0.95);
+      transition: transform 0.34s cubic-bezier(0.34, 1.56, 0.64, 1),
+                  box-shadow 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+                  border-color 0.22s ease,
+                  background 0.22s ease;
+      cursor: pointer;
+      user-select: none;
+    }
+    .lg-select-trigger:hover {
+      transform: perspective(700px) translate3d(0, -1.5px, 6px);
+      border-color: #2E6B4E;
+      box-shadow: 0 8px 20px -4px rgba(27, 67, 48, 0.14),
+                  inset 0 1.5px 2px rgba(255, 255, 255, 1);
+    }
+    .lg-select-trigger:active,
+    .lg-select-trigger.is-open {
+      transform: perspective(700px) translate3d(0, 0.5px, 2px) scale(0.985);
+      border-color: #1B4330;
+      background: linear-gradient(145deg, rgba(255, 254, 251, 0.98) 0%, rgba(235, 243, 238, 0.92) 100%);
+      box-shadow: 0 0 0 3px rgba(46, 107, 78, 0.16),
+                  inset 0 1.5px 2px rgba(255, 255, 255, 1);
+    }
+    .lg-select-chevron {
+      transition: transform 0.38s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .lg-select-trigger.is-open .lg-select-chevron {
+      transform: rotate(180deg) scale(1.1);
+      color: #1B4330;
+    }
+
+    /* Floating iPhone Liquid Glass Popover Window */
+    #lg-popover-menu {
+      position: fixed;
+      z-index: 9999;
+      min-width: 220px;
+      max-width: min(94vw, 420px);
+      max-height: min(68vh, 390px);
+      overflow-y: auto;
+      padding: 6px;
+      border-radius: 1.25rem;
+      background: linear-gradient(155deg, rgba(253, 251, 247, 0.92) 0%, rgba(242, 233, 218, 0.88) 100%);
+      backdrop-filter: blur(24px) saturate(190%);
+      -webkit-backdrop-filter: blur(24px) saturate(190%);
+      border: 1.5px solid rgba(255, 255, 255, 0.88);
+      box-shadow: 0 22px 48px -10px rgba(20, 48, 34, 0.28),
+                  0 6px 16px -4px rgba(38, 24, 15, 0.14),
+                  inset 0 2px 3px rgba(255, 255, 255, 0.98),
+                  inset 0 -1px 2px rgba(196, 178, 153, 0.45);
+      transform-origin: var(--pop-origin-x, 50%) var(--pop-origin-y, 0%);
+      animation: lgPopoverSpringIn 0.4s cubic-bezier(0.32, 1.44, 0.54, 1) forwards;
+      will-change: transform, opacity;
+    }
+    #lg-popover-menu.is-closing {
+      animation: lgPopoverSpringOut 0.22s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+    @keyframes lgPopoverSpringIn {
+      0% {
+        opacity: 0;
+        transform: perspective(900px) translate3d(0, -10px, -40px) rotateX(-14deg) scale(0.86);
+      }
+      68% {
+        opacity: 1;
+        transform: perspective(900px) translate3d(0, 2px, 8px) rotateX(2deg) scale(1.015);
+      }
+      100% {
+        opacity: 1;
+        transform: perspective(900px) translate3d(0, 0, 0) rotateX(0deg) scale(1);
+      }
+    }
+    @keyframes lgPopoverSpringOut {
+      0% {
+        opacity: 1;
+        transform: perspective(900px) translate3d(0, 0, 0) rotateX(0deg) scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: perspective(900px) translate3d(0, -6px, -25px) rotateX(-8deg) scale(0.92);
+      }
+    }
+
+    /* Sliding Liquid Glass Pill inside Popover Menu */
+    #lg-popover-pill {
+      position: absolute;
+      left: 6px;
+      right: 6px;
+      top: 0;
+      height: 38px;
+      border-radius: 0.85rem;
+      background: linear-gradient(135deg, rgba(27, 67, 48, 0.13) 0%, rgba(46, 107, 78, 0.20) 100%);
+      border: 1px solid rgba(46, 107, 78, 0.28);
+      box-shadow: 0 4px 12px rgba(27, 67, 48, 0.08),
+                  inset 0 1px 2px rgba(255, 255, 255, 0.85);
+      transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+                  height 0.22s cubic-bezier(0.22, 1, 0.36, 1),
+                  opacity 0.18s ease;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0;
+      will-change: transform, height;
+    }
+
+    .lg-popover-item {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.65rem;
+      width: 100%;
+      padding: 0.6rem 0.85rem;
+      border-radius: 0.85rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #26180F;
+      text-align: left;
+      transition: transform 0.24s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.18s ease;
+      cursor: pointer;
+      user-select: none;
+    }
+    .lg-popover-item:hover,
+    .lg-popover-item.is-hovered {
+      color: #143324;
+      transform: translate3d(3px, 0, 0);
+    }
+    .lg-popover-item.is-selected {
+      font-weight: 800;
+      color: #143324;
+      background: rgba(27, 67, 48, 0.08);
+    }
+    .lg-popover-item:active {
+      transform: scale(0.97);
+    }
+
+    /* Auth Modal Liquid Glass Segmented Switcher & Smooth Field Accordion (Zero Clipping) */
+    #auth-liquid-track {
+      position: relative;
+      background: rgba(226, 213, 193, 0.85);
+      border: 1px solid rgba(196, 177, 151, 0.9);
+      box-shadow: inset 0 1.5px 3px rgba(38, 24, 15, 0.09);
+      user-select: none;
+      overflow: hidden;
+    }
+    #auth-liquid-pill {
+      position: absolute;
+      top: 4px;
+      bottom: 4px;
+      left: 4px;
+      width: calc(50% - 4px);
+      border-radius: 0.85rem;
+      background: linear-gradient(135deg, #1B4330 0%, #2E6B4E 100%);
+      box-shadow: 0 4px 14px rgba(27, 67, 48, 0.32),
+                  inset 0 1.5px 2px rgba(255, 255, 255, 0.38);
+      transition: transform 0.46s cubic-bezier(0.32, 1.38, 0.54, 1),
+                  box-shadow 0.25s ease;
+      pointer-events: none;
+      z-index: 0;
+      will-change: transform;
+    }
+    .auth-morph-row {
+      display: grid;
+      grid-template-rows: 0fr;
+      opacity: 0;
+      transform: translate3d(0, -6px, 0) scale(0.985);
+      transition: grid-template-rows 0.42s cubic-bezier(0.22, 1, 0.36, 1),
+                  opacity 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 0.42s cubic-bezier(0.22, 1, 0.36, 1);
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .auth-morph-row.is-expanded {
+      grid-template-rows: 1fr;
+      opacity: 1;
+      transform: translate3d(0, 0, 0) scale(1);
+      pointer-events: auto;
+    }
+    .auth-morph-inner {
+      min-height: 0;
+      overflow: hidden;
+    }
+
+    /* Universal Liquid Glass Interactive Filter Pills & Action Blocks */
+    label.cursor-pointer,
+    .lg-pill-interactive {
+      transition: transform 0.32s cubic-bezier(0.34, 1.56, 0.64, 1),
+                  box-shadow 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+                  background-color 0.22s ease,
+                  border-color 0.22s ease !important;
+      box-shadow: 0 2px 8px rgba(27, 67, 48, 0.05), inset 0 1px 1px rgba(255, 255, 255, 0.85);
+    }
+    label.cursor-pointer:hover,
+    .lg-pill-interactive:hover {
+      transform: perspective(700px) translate3d(0, -2px, 6px) scale(1.015);
+      box-shadow: 0 8px 18px -4px rgba(27, 67, 48, 0.13), inset 0 1px 2px rgba(255, 255, 255, 0.95);
+    }
+    label.cursor-pointer:active,
+    .lg-pill-interactive:active {
+      transform: perspective(700px) translate3d(0, 0.5px, -2px) scale(0.975);
     }
 
     /* Custom Scrollbar */
@@ -672,10 +1004,7 @@
             <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
             <span>Thi thử 50 câu</span>
           </button>
-          <button id="nav-bank" onclick="switchTab('bank')" class="nav-tab-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 whitespace-nowrap shrink-0">
-            <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
-            <span>Ngân hàng (200)</span>
-          </button>
+
         </nav>
 
         <div id="sync-status-indicator" class="hidden md:flex items-center gap-1.5 text-[11px] text-[#C8E0D4] font-medium whitespace-nowrap">
@@ -723,7 +1052,7 @@
             <p class="text-2xl font-bold text-forest-800 mt-1"><span id="stat-done">0</span><span class="text-sm font-normal text-walnut-500"> / 200</span></p>
             <p id="stat-done-pct" class="text-[11px] text-forest-600 font-semibold mt-0.5">Hoàn thành 0%</p>
           </div>
-          <div class="w-11 h-11 rounded-xl bg-forest-50 border border-forest-100 flex items-center justify-center text-forest-700 font-bold text-sm">
+          <div class="w-12 h-11 rounded-xl bg-forest-50 border border-forest-200 flex items-center justify-center text-center text-forest-800 font-extrabold text-xs shrink-0 shadow-sm">
             200
           </div>
         </div>
@@ -756,8 +1085,9 @@
             <p id="stat-exam-count" class="text-2xl font-bold text-walnut-700 mt-1">0 đề</p>
             <p id="stat-exam-best" class="text-[11px] text-walnut-600 font-semibold mt-0.5">Điểm cao nhất: --/10</p>
           </div>
-          <div class="w-11 h-11 rounded-xl bg-walnut-50 border border-walnut-100 flex items-center justify-center text-walnut-700 font-bold text-xs">
-            50 CÂU
+          <div class="w-12 h-11 rounded-xl bg-walnut-50 border border-walnut-200 flex flex-col items-center justify-center text-center text-walnut-800 shrink-0 leading-none shadow-sm">
+            <span class="text-xs font-extrabold leading-none">50</span>
+            <span class="text-[9px] font-bold uppercase tracking-wider leading-none mt-1">CÂU</span>
           </div>
         </div>
       </div>
@@ -811,11 +1141,15 @@
         </div>
 
         <div id="practice-filter-collapsible" class="mobile-filter-collapsed sm:flex flex-col xl:flex-row xl:items-center justify-between gap-3">
-          <!-- Filters -->
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 flex-1">
-            <div>
-              <label for="filter-chapter" class="block text-[11px] font-semibold text-walnut-600 mb-1">Chương học phần</label>
-              <select id="filter-chapter" onchange="applyPracticeFilters()" class="w-full rounded-xl border border-[#C9B9A3] bg-[#FDFBF7] px-3 py-2 text-xs font-semibold text-walnut-900 focus:outline-none focus:border-forest-600">
+          <!-- Filters (Custom iPhone Liquid Glass Popover Triggers) -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 flex-1 min-w-0">
+            <div class="min-w-0">
+              <label for="filter-chapter" class="block text-[11px] font-bold text-walnut-700 mb-1">Chương học phần</label>
+              <button type="button" id="lg-btn-filter-chapter" onclick="openLiquidGlassPopover('filter-chapter')" class="lg-select-trigger px-3 py-2 text-xs font-bold text-walnut-900">
+                <span id="lg-lbl-filter-chapter" class="truncate">Tất cả 6 Chương (200 câu)</span>
+                <span class="lg-select-chevron text-walnut-600 text-[11px] shrink-0">▾</span>
+              </button>
+              <select id="filter-chapter" onchange="applyPracticeFilters()" class="hidden">
                 <option value="all">Tất cả 6 Chương (200 câu)</option>
                 <option value="1">Chương 1: Nhập môn NLS & Môi trường số (32 câu)</option>
                 <option value="2">Chương 2: Khai thác dữ liệu & thông tin (36 câu)</option>
@@ -827,9 +1161,13 @@
               </select>
             </div>
 
-            <div>
-              <label for="filter-level" class="block text-[11px] font-semibold text-walnut-600 mb-1">Cấp độ câu hỏi</label>
-              <select id="filter-level" onchange="applyPracticeFilters()" class="w-full rounded-xl border border-[#C9B9A3] bg-[#FDFBF7] px-3 py-2 text-xs font-semibold text-walnut-900 focus:outline-none focus:border-forest-600">
+            <div class="min-w-0">
+              <label for="filter-level" class="block text-[11px] font-bold text-walnut-700 mb-1">Cấp độ câu hỏi</label>
+              <button type="button" id="lg-btn-filter-level" onclick="openLiquidGlassPopover('filter-level')" class="lg-select-trigger px-3 py-2 text-xs font-bold text-walnut-900">
+                <span id="lg-lbl-filter-level" class="truncate">Tất cả cấp độ (Dễ → Khó)</span>
+                <span class="lg-select-chevron text-walnut-600 text-[11px] shrink-0">▾</span>
+              </button>
+              <select id="filter-level" onchange="applyPracticeFilters()" class="hidden">
                 <option value="all">Tất cả cấp độ (Dễ → Khó)</option>
                 <option value="1">Cấp độ 1: Nhận biết & Khái niệm (72 câu)</option>
                 <option value="2">Cấp độ 2: Thông hiểu & Quy trình (47 câu)</option>
@@ -837,10 +1175,14 @@
               </select>
             </div>
 
-            <div>
-              <label for="filter-order" class="block text-[11px] font-semibold text-walnut-600 mb-1">Thứ tự hiển thị</label>
-              <select id="filter-order" onchange="applyPracticeFilters()" class="w-full rounded-xl border border-[#C9B9A3] bg-[#FDFBF7] px-3 py-2 text-xs font-semibold text-walnut-900 focus:outline-none focus:border-forest-600">
-                <option value="sequential">Theo thứ tự chuẩn (Từ câu nhỏ → lớn)</option>
+            <div class="min-w-0">
+              <label for="filter-order" class="block text-[11px] font-bold text-walnut-700 mb-1">Thứ tự hiển thị</label>
+              <button type="button" id="lg-btn-filter-order" onclick="openLiquidGlassPopover('filter-order')" class="lg-select-trigger px-3 py-2 text-xs font-bold text-walnut-900">
+                <span id="lg-lbl-filter-order" class="truncate">Theo thứ tự chuẩn (Câu 1 → 200)</span>
+                <span class="lg-select-chevron text-walnut-600 text-[11px] shrink-0">▾</span>
+              </button>
+              <select id="filter-order" onchange="applyPracticeFilters()" class="hidden">
+                <option value="sequential">Theo thứ tự chuẩn (Câu 1 → 200)</option>
                 <option value="level_asc">Theo cấp độ (Cấp 1 → Cấp 2 → Cấp 3)</option>
                 <option value="unanswered">Ưu tiên câu chưa làm trước</option>
                 <option value="random">Trộn ngẫu nhiên câu hỏi</option>
@@ -858,14 +1200,16 @@
             </label>
 
             <!-- Delay selector (default 2200ms so user can glance at explanation or hover to pause) -->
-            <div class="flex items-center gap-1.5 bg-walnut-50 px-2.5 py-2 rounded-xl border border-walnut-100">
-              <span class="text-[11px] font-semibold text-walnut-700">Chờ:</span>
-              <select id="select-autoskip-delay" onchange="updatePracticePrefs()" class="bg-transparent text-xs font-bold text-walnut-800 focus:outline-none">
-                <option value="1200">1.2 giây</option>
-                <option value="2200" selected>2.2 giây</option>
-                <option value="3500">3.5 giây</option>
-              </select>
-            </div>
+            <button type="button" id="lg-btn-select-autoskip-delay" onclick="openLiquidGlassPopover('select-autoskip-delay')" class="lg-select-trigger !w-auto px-3 py-2 text-xs font-bold text-walnut-800">
+              <span class="text-[11px] font-semibold text-walnut-600">Chờ:</span>
+              <span id="lg-lbl-select-autoskip-delay">2.2 giây</span>
+              <span class="lg-select-chevron text-walnut-600 text-[11px]">▾</span>
+            </button>
+            <select id="select-autoskip-delay" onchange="updatePracticePrefs()" class="hidden">
+              <option value="1200">1.2 giây</option>
+              <option value="2200" selected>2.2 giây</option>
+              <option value="3500">3.5 giây</option>
+            </select>
 
             <!-- Highlight keywords toggle -->
             <label class="inline-flex items-center gap-1.5 cursor-pointer select-none bg-amber-50 px-3 py-2 rounded-xl border border-amber-200" title="Tự động tô sáng các từ khóa mấu chốt trong câu hỏi">
@@ -1035,7 +1379,11 @@
         </div>
 
         <div class="flex flex-wrap items-center gap-2 shrink-0">
-          <select id="fc-filter-select" onchange="applyFlashcardFilter()" class="rounded-xl border border-[#C9B9A3] bg-[#FDFBF7] px-3 py-2 text-xs font-bold text-walnut-900">
+          <button type="button" id="lg-btn-fc-filter-select" onclick="openLiquidGlassPopover('fc-filter-select')" class="lg-select-trigger !w-auto min-w-[185px] px-3.5 py-2 text-xs font-bold text-walnut-900">
+            <span id="lg-lbl-fc-filter-select" class="truncate">Tất cả 200 câu</span>
+            <span class="lg-select-chevron text-walnut-600 text-[11px] shrink-0">▾</span>
+          </button>
+          <select id="fc-filter-select" onchange="applyFlashcardFilter()" class="hidden">
             <option value="all">Tất cả 200 câu</option>
             <option value="unmastered">Các câu chưa thuộc</option>
             <option value="wrong">Các câu đang làm sai</option>
@@ -1059,7 +1407,7 @@
           <span id="fc-mastered-status" class="px-2.5 py-0.5 rounded-full bg-cream-200 text-walnut-800">Đang học</span>
         </div>
 
-        <div class="flashcard-perspective cursor-pointer select-none" onclick="flipFlashcard()">
+        <div id="flashcard-stage-wrap" class="flashcard-perspective cursor-pointer select-none" onclick="flipFlashcard()">
           <div id="fc-card-inner" class="flashcard-inner">
             <!-- Front Face -->
             <div class="flashcard-face smooth-card rounded-2xl p-5 sm:p-8 flex flex-col justify-between min-h-[290px] bg-gradient-to-br from-[#FDFBF7] to-[#F4ECE0] border-2 border-[#D5C4AC] shadow-md">
@@ -1248,9 +1596,13 @@
           </div>
 
           <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 shrink-0">
-            <div class="bg-cream-100 px-3.5 py-2 rounded-xl border border-[#D5C7B2]">
-              <label for="exam-duration-select" class="block text-[10px] font-bold uppercase text-walnut-600">Thời gian làm bài</label>
-              <select id="exam-duration-select" class="bg-transparent font-bold text-sm text-forest-800 focus:outline-none">
+            <div class="min-w-[235px]">
+              <label for="exam-duration-select" class="block text-[10px] font-bold uppercase text-walnut-600 mb-1">Thời gian làm bài</label>
+              <button type="button" id="lg-btn-exam-duration-select" onclick="openLiquidGlassPopover('exam-duration-select')" class="lg-select-trigger px-3.5 py-2.5 text-xs sm:text-sm font-bold text-forest-800">
+                <span id="lg-lbl-exam-duration-select" class="truncate">50 phút (Tiêu chuẩn 1 phút/câu)</span>
+                <span class="lg-select-chevron text-forest-700 text-xs shrink-0">▾</span>
+              </button>
+              <select id="exam-duration-select" class="hidden">
                 <option value="40">40 phút (Luyện tốc độ)</option>
                 <option value="50" selected>50 phút (Tiêu chuẩn 1 phút/câu)</option>
                 <option value="60">60 phút (Thong thả)</option>
@@ -1469,47 +1821,7 @@
       </div>
     </section>
 
-    <!-- ==================== VIEW 5: QUESTION BANK EXPLORER (200 QUESTIONS) ==================== -->
-    <section id="view-bank" class="hidden space-y-4 fade-slide-enter">
-      <div class="smooth-card rounded-2xl p-4 sm:p-5 space-y-3">
-        <div class="flex flex-col md:flex-row md:items-center justify-between gap-3">
-          <div>
-            <h2 class="text-base sm:text-lg font-bold text-forest-900 vn-heading">Tra Cứu Toàn Bộ Ngân Hàng 200 Câu Hỏi & Giải Thích Chuyên Sâu</h2>
-            <p class="text-xs text-walnut-600">Tìm kiếm tức thì theo từ khóa, chương hoặc cấp độ để đọc ôn tổng hợp trước kỳ thi</p>
-          </div>
-          <label class="inline-flex items-center gap-2 cursor-pointer select-none bg-forest-50 px-3.5 py-2 rounded-xl border border-forest-100">
-            <input type="checkbox" id="toggle-bank-show-ans" onchange="renderBankList()" checked class="rounded text-forest-600">
-            <span class="text-xs font-bold text-forest-800">Hiển thị sẵn Đáp án & Phân tích A, B, C, D</span>
-          </label>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
-          <input type="text" id="bank-search-input" oninput="renderBankList()" placeholder="Tìm từ khóa hoặc số câu (VD: 45, Zotero, deepfake, CRAAP...)" class="w-full rounded-xl border border-[#C9B9A3] bg-[#FDFBF7] px-3.5 py-2 text-xs font-medium text-walnut-900 focus:outline-none focus:border-forest-600" />
-          <select id="bank-chapter-select" onchange="renderBankList()" class="w-full rounded-xl border border-[#C9B9A3] bg-[#FDFBF7] px-3 py-2 text-xs font-semibold text-walnut-900 focus:outline-none focus:border-forest-600">
-            <option value="all">Tất cả 6 Chương (200 câu)</option>
-            <option value="1">Chương 1: Nhập môn NLS & Môi trường số</option>
-            <option value="2">Chương 2: Khai thác dữ liệu & thông tin</option>
-            <option value="3">Chương 3: Giao tiếp & Hợp tác số</option>
-            <option value="4">Chương 4: Sáng tạo nội dung số</option>
-            <option value="5">Chương 5: An toàn thông tin & Đạo đức số</option>
-            <option value="6">Chương 6: Ứng dụng AI & Giải quyết vấn đề</option>
-          </select>
-          <select id="bank-level-select" onchange="renderBankList()" class="w-full rounded-xl border border-[#C9B9A3] bg-[#FDFBF7] px-3 py-2 text-xs font-semibold text-walnut-900 focus:outline-none focus:border-forest-600">
-            <option value="all">Tất cả 3 cấp độ</option>
-            <option value="1">Cấp độ 1: Nhận biết & Khái niệm</option>
-            <option value="2">Cấp độ 2: Thông hiểu & Quy trình</option>
-            <option value="3">Cấp độ 3: Vận dụng & Tình huống</option>
-          </select>
-        </div>
-        <div class="text-xs font-semibold text-walnut-600">
-          Tìm thấy <span id="bank-found-count" class="text-forest-700 font-bold">200</span> câu hỏi phù hợp
-        </div>
-      </div>
-
-      <div id="bank-questions-container" class="space-y-3"></div>
-    </section>
-
-  </main>
+      </main>
 
   <!-- Mobile Floating Liquid Glass Bottom Navigation Bar (<640px) with Press-and-Glide Droplet -->
   <nav id="mobile-nav-container" class="hidden">
@@ -1535,10 +1847,7 @@
       <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
       <span>Thi 50 câu</span>
     </button>
-    <button id="mnav-bank" onclick="switchTab('bank')" class="mnav-btn flex-1 py-1.5 px-1 rounded-xl flex flex-col items-center justify-center gap-0.5 text-[10px] font-semibold transition-all">
-      <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
-      <span>Ngân hàng</span>
-    </button>
+
   </nav>
 
   <!-- ==================== USER AUTHENTICATION & SUPABASE CLOUD SYNC MODAL ==================== -->
@@ -1560,45 +1869,52 @@
         </button>
       </div>
 
-      <!-- Sub-panel A: Guest / Login & Register Tabs (No Admin Account) -->
+      <!-- Sub-panel A: Guest / Login & Register Tabs (No Admin Account) with Liquid Glass Sliding Pill -->
       <div id="auth-guest-panel" class="space-y-4">
         <!-- Segmented Switcher: Đăng nhập vs Tạo tài khoản mới -->
-        <div class="grid grid-cols-2 gap-1.5 p-1 rounded-2xl bg-[#EAE0CE]/80 border border-[#D5C4AC]">
-          <button id="tab-btn-login" onclick="switchAuthMode('login')" class="py-2 rounded-xl text-xs font-bold transition-all bg-[#1B4330] text-white shadow-sm">
+        <div id="auth-liquid-track" class="grid grid-cols-2 p-1 rounded-2xl relative">
+          <div id="auth-liquid-pill"></div>
+          <button id="tab-btn-login" onclick="switchAuthMode('login')" class="relative z-10 py-2.5 rounded-xl text-xs font-extrabold transition-colors text-white">
             Đăng nhập tài khoản
           </button>
-          <button id="tab-btn-register" onclick="switchAuthMode('register')" class="py-2 rounded-xl text-xs font-bold transition-all text-walnut-800 hover:bg-white/50">
+          <button id="tab-btn-register" onclick="switchAuthMode('register')" class="relative z-10 py-2.5 rounded-xl text-xs font-bold transition-colors text-walnut-800 hover:text-forest-900">
             Tạo tài khoản mới
           </button>
         </div>
 
-        <div id="auth-error-msg" class="hidden p-3 rounded-xl bg-red-50 border border-red-300 text-xs font-semibold text-[#B93829]"></div>
+        <div id="auth-error-msg" class="hidden p-3 rounded-xl bg-red-50 border border-red-300 text-xs font-semibold text-[#B93829] pop-scale"></div>
 
-        <!-- Form Fields -->
-        <div class="space-y-3">
-          <div id="field-register-name" class="hidden">
-            <label for="auth-fullname" class="block text-xs font-bold text-walnut-800 mb-1">Họ và tên sinh viên</label>
-            <input type="text" id="auth-fullname" placeholder="VD: Nguyễn Văn A" class="w-full rounded-xl border border-[#C9B9A3] bg-white px-3.5 py-2.5 text-xs sm:text-sm font-medium text-walnut-900 focus:outline-none focus:border-forest-600" />
+        <!-- Form Fields with Zero-Glitch Liquid Glass Accordion Expansion -->
+        <div id="auth-form-fields-wrap">
+          <div id="field-register-name" class="auth-morph-row">
+            <div class="auth-morph-inner px-0.5 pb-3">
+              <label for="auth-fullname" class="block text-xs font-bold text-walnut-800 mb-1">Họ và tên sinh viên</label>
+              <input type="text" id="auth-fullname" placeholder="VD: Nguyễn Văn A" class="w-full rounded-xl border border-[#C9B9A3] bg-white px-3.5 py-2.5 text-xs sm:text-sm font-medium text-walnut-900 focus:outline-none focus:border-forest-600 transition-shadow focus:ring-2 focus:ring-forest-500/20" />
+            </div>
           </div>
 
-          <div id="field-register-studentid" class="hidden">
-            <label for="auth-studentid" class="block text-xs font-bold text-walnut-800 mb-1">Mã sinh viên / Lớp (Tùy chọn)</label>
-            <input type="text" id="auth-studentid" placeholder="VD: K225480106..." class="w-full rounded-xl border border-[#C9B9A3] bg-white px-3.5 py-2.5 text-xs sm:text-sm font-medium text-walnut-900 focus:outline-none focus:border-forest-600" />
+          <div id="field-register-studentid" class="auth-morph-row">
+            <div class="auth-morph-inner px-0.5 pb-3">
+              <label for="auth-studentid" class="block text-xs font-bold text-walnut-800 mb-1">Mã sinh viên / Lớp (Tùy chọn)</label>
+              <input type="text" id="auth-studentid" placeholder="VD: K225480106..." class="w-full rounded-xl border border-[#C9B9A3] bg-white px-3.5 py-2.5 text-xs sm:text-sm font-medium text-walnut-900 focus:outline-none focus:border-forest-600 transition-shadow focus:ring-2 focus:ring-forest-500/20" />
+            </div>
           </div>
 
-          <div>
+          <div class="px-0.5 pb-3">
             <label for="auth-email" class="block text-xs font-bold text-walnut-800 mb-1">Địa chỉ Email hoặc Tên đăng nhập</label>
-            <input type="email" id="auth-email" placeholder="sinhvien@tnut.edu.vn" class="w-full rounded-xl border border-[#C9B9A3] bg-white px-3.5 py-2.5 text-xs sm:text-sm font-medium text-walnut-900 focus:outline-none focus:border-forest-600" />
+            <input type="email" id="auth-email" placeholder="sinhvien@tnut.edu.vn" class="w-full rounded-xl border border-[#C9B9A3] bg-white px-3.5 py-2.5 text-xs sm:text-sm font-medium text-walnut-900 focus:outline-none focus:border-forest-600 transition-shadow focus:ring-2 focus:ring-forest-500/20" />
           </div>
 
-          <div>
+          <div class="px-0.5 pb-1">
             <label for="auth-password" class="block text-xs font-bold text-walnut-800 mb-1">Mật khẩu (tối thiểu 6 ký tự)</label>
-            <input type="password" id="auth-password" placeholder="••••••••" class="w-full rounded-xl border border-[#C9B9A3] bg-white px-3.5 py-2.5 text-xs sm:text-sm font-medium text-walnut-900 focus:outline-none focus:border-forest-600" />
+            <input type="password" id="auth-password" placeholder="••••••••" class="w-full rounded-xl border border-[#C9B9A3] bg-white px-3.5 py-2.5 text-xs sm:text-sm font-medium text-walnut-900 focus:outline-none focus:border-forest-600 transition-shadow focus:ring-2 focus:ring-forest-500/20" />
           </div>
 
-          <div id="field-register-confirm" class="hidden">
-            <label for="auth-password-confirm" class="block text-xs font-bold text-walnut-800 mb-1">Nhập lại mật khẩu</label>
-            <input type="password" id="auth-password-confirm" placeholder="••••••••" class="w-full rounded-xl border border-[#C9B9A3] bg-white px-3.5 py-2.5 text-xs sm:text-sm font-medium text-walnut-900 focus:outline-none focus:border-forest-600" />
+          <div id="field-register-confirm" class="auth-morph-row">
+            <div class="auth-morph-inner px-0.5 pt-2.5 pb-1">
+              <label for="auth-password-confirm" class="block text-xs font-bold text-walnut-800 mb-1">Nhập lại mật khẩu</label>
+              <input type="password" id="auth-password-confirm" placeholder="••••••••" class="w-full rounded-xl border border-[#C9B9A3] bg-white px-3.5 py-2.5 text-xs sm:text-sm font-medium text-walnut-900 focus:outline-none focus:border-forest-600 transition-shadow focus:ring-2 focus:ring-forest-500/20" />
+            </div>
           </div>
         </div>
 
@@ -1708,6 +2024,13 @@
         </button>
       </div>
     </div>
+  </div>
+
+    <!-- ==================== FLOATING IPHONE LIQUID GLASS POPOVER MENU ==================== -->
+  <div id="lg-popover-backdrop" onclick="closeLiquidGlassPopover()" class="fixed inset-0 z-[9990] hidden bg-transparent"></div>
+  <div id="lg-popover-menu" class="hidden" role="listbox">
+    <div id="lg-popover-pill"></div>
+    <div id="lg-popover-items" class="relative z-10 space-y-0.5"></div>
   </div>
 
   <!-- Toast Notification -->
@@ -1995,10 +2318,11 @@
       if (modal) modal.classList.add('hidden');
     }
 
-    function switchAuthMode(mode) {
+    function switchAuthMode(mode, isDragging = false) {
       authMode = mode;
       const loginBtn = document.getElementById('tab-btn-login');
       const regBtn = document.getElementById('tab-btn-register');
+      const authPill = document.getElementById('auth-liquid-pill');
       const nameField = document.getElementById('field-register-name');
       const sidField = document.getElementById('field-register-studentid');
       const confField = document.getElementById('field-register-confirm');
@@ -2006,19 +2330,30 @@
       const errBox = document.getElementById('auth-error-msg');
       if (errBox) errBox.classList.add('hidden');
 
+      // 1. Animate the Liquid Glass Sliding Pill smoothly at Z=0 so it NEVER covers button text
+      if (authPill && !isDragging) {
+        const targetX = (mode === 'login') ? '0%' : '100%';
+        authPill.style.transform = `translate3d(${targetX}, 0, 0) scaleX(1.04) scaleY(0.96)`;
+        clearTimeout(authPill._settle);
+        authPill._settle = setTimeout(() => {
+          authPill.style.transform = `translate3d(${targetX}, 0, 0) scaleX(1) scaleY(1)`;
+        }, 220);
+      }
+
+      // 2. Smoothly expand/collapse the registration fields via pure CSS Grid 0fr <-> 1fr
       if (mode === 'login') {
-        loginBtn.className = 'py-2 rounded-xl text-xs font-bold transition-all bg-[#1B4330] text-white shadow-sm';
-        regBtn.className = 'py-2 rounded-xl text-xs font-bold transition-all text-walnut-800 hover:bg-white/50';
-        nameField.classList.add('hidden');
-        sidField.classList.add('hidden');
-        confField.classList.add('hidden');
+        loginBtn.className = 'relative z-10 py-2.5 rounded-xl text-xs font-extrabold transition-colors duration-200 text-white';
+        regBtn.className = 'relative z-10 py-2.5 rounded-xl text-xs font-bold transition-colors duration-200 text-walnut-800 hover:text-forest-900';
+        [nameField, sidField, confField].forEach(el => {
+          if (el) el.classList.remove('is-expanded');
+        });
         submitBtn.textContent = 'Đăng nhập & Đồng bộ dữ liệu';
       } else {
-        regBtn.className = 'py-2 rounded-xl text-xs font-bold transition-all bg-[#1B4330] text-white shadow-sm';
-        loginBtn.className = 'py-2 rounded-xl text-xs font-bold transition-all text-walnut-800 hover:bg-white/50';
-        nameField.classList.remove('hidden');
-        sidField.classList.remove('hidden');
-        confField.classList.remove('hidden');
+        regBtn.className = 'relative z-10 py-2.5 rounded-xl text-xs font-extrabold transition-colors duration-200 text-white';
+        loginBtn.className = 'relative z-10 py-2.5 rounded-xl text-xs font-bold transition-colors duration-200 text-walnut-800 hover:text-forest-900';
+        [nameField, sidField, confField].forEach(el => {
+          if (el) el.classList.add('is-expanded');
+        });
         submitBtn.textContent = 'Tạo tài khoản Sinh viên mới';
       }
     }
@@ -2345,6 +2680,199 @@
     }
 
     // ---------------- INITIALIZATION ----------------
+
+    // ==================== IPHONE LIQUID GLASS POPOVER MENU ENGINE ====================
+    const LIQUID_SELECT_IDS = [
+      'filter-chapter',
+      'filter-level',
+      'filter-order',
+      'select-autoskip-delay',
+      'fc-filter-select',
+      'exam-duration-select'
+    ];
+    let activePopoverSelectId = null;
+
+    function syncLiquidSelects() {
+      LIQUID_SELECT_IDS.forEach(selId => {
+        const sel = document.getElementById(selId);
+        const lbl = document.getElementById('lg-lbl-' + selId);
+        if (!sel || !lbl) return;
+        let matchedText = '';
+        if (sel.options && sel.options.length > 0) {
+          for (let i = 0; i < sel.options.length; i++) {
+            if (sel.options[i].value === String(sel.value)) {
+              matchedText = sel.options[i].textContent;
+              break;
+            }
+          }
+          if (!matchedText) matchedText = sel.options[0].textContent;
+        }
+        if (matchedText) lbl.textContent = matchedText;
+      });
+    }
+
+    function openLiquidGlassPopover(selectId) {
+      const sel = document.getElementById(selectId);
+      const btn = document.getElementById('lg-btn-' + selectId);
+      const menu = document.getElementById('lg-popover-menu');
+      const itemsBox = document.getElementById('lg-popover-items');
+      const pill = document.getElementById('lg-popover-pill');
+      const backdrop = document.getElementById('lg-popover-backdrop');
+      if (!sel || !btn || !menu || !itemsBox || !backdrop) return;
+
+      if (activePopoverSelectId === selectId && !menu.classList.contains('hidden')) {
+        closeLiquidGlassPopover();
+        return;
+      }
+
+      activePopoverSelectId = selectId;
+      document.querySelectorAll('.lg-select-trigger').forEach(b => b.classList.remove('is-open'));
+      btn.classList.add('is-open');
+
+      const opts = sel.options ? Array.from(sel.options) : [];
+      const currentVal = String(sel.value);
+
+      itemsBox.innerHTML = opts.map((opt, idx) => {
+        const val = opt.value;
+        const text = opt.textContent;
+        const isSel = (val === currentVal);
+        return `
+          <button type="button" data-idx="${idx}" data-val="${escapeHtml(val)}"
+            onclick="selectLiquidGlassOption('${selectId}', '${escapeHtml(val)}')"
+            onpointerenter="movePopoverHighlightPill(this)"
+            class="lg-popover-item ${isSel ? 'is-selected' : ''}">
+            <span class="truncate">${escapeHtml(text)}</span>
+            <span class="text-xs font-extrabold ${isSel ? 'text-forest-700 opacity-100 scale-100' : 'opacity-0 scale-50'} transition-all">✓</span>
+          </button>
+        `;
+      }).join('');
+
+      backdrop.classList.remove('hidden');
+      menu.classList.remove('hidden', 'is-closing');
+
+      // Position menu smoothly relative to the trigger button (staying inside viewport on both phone & desktop)
+      if (btn.getBoundingClientRect) {
+        const rect = btn.getBoundingClientRect();
+        const vw = window.innerWidth || 1024;
+        const vh = window.innerHeight || 768;
+        const menuW = Math.max(rect.width, 250);
+        let left = rect.left;
+        if (left + menuW > vw - 12) left = Math.max(12, vw - menuW - 12);
+
+        const spaceBelow = vh - rect.bottom;
+        menu.style.width = `${ Math.min(vw - 24, Math.max(rect.width, 260)) }px`;
+        menu.style.left = `${left}px`;
+
+        if (spaceBelow < 240 && rect.top > 240) {
+          menu.style.top = 'auto';
+          menu.style.bottom = `${vh - rect.top + 6}px`;
+          menu.style.setProperty('--pop-origin-y', '100%');
+        } else {
+          menu.style.bottom = 'auto';
+          menu.style.top = `${rect.bottom + 6}px`;
+          menu.style.setProperty('--pop-origin-y', '0%');
+        }
+      }
+
+      // Snap initial highlight pill to selected item
+      requestAnimationFrame(() => {
+        const selBtn = itemsBox.querySelector('.lg-popover-item.is-selected') || itemsBox.querySelector('.lg-popover-item');
+        if (selBtn) movePopoverHighlightPill(selBtn);
+      });
+    }
+
+    function movePopoverHighlightPill(itemEl) {
+      const pill = document.getElementById('lg-popover-pill');
+      if (!pill || !itemEl) return;
+      const top = (itemEl.offsetTop || 0) + 6;
+      const h = itemEl.offsetHeight || 36;
+      pill.style.opacity = '1';
+      pill.style.height = `${h}px`;
+      pill.style.transform = `translate3d(0, ${top}px, 0)`;
+    }
+
+    function selectLiquidGlassOption(selectId, value) {
+      const sel = document.getElementById(selectId);
+      if (sel) {
+        sel.value = value;
+        syncLiquidSelects();
+        if (typeof sel.onchange === 'function') {
+          sel.onchange();
+        } else {
+          if (selectId === 'filter-chapter' || selectId === 'filter-level' || selectId === 'filter-order') {
+            applyPracticeFilters();
+          } else if (selectId === 'select-autoskip-delay') {
+            updatePracticePrefs();
+          } else if (selectId === 'fc-filter-select') {
+            applyFlashcardFilter();
+          }
+        }
+      }
+      closeLiquidGlassPopover();
+    }
+
+    function closeLiquidGlassPopover() {
+      const menu = document.getElementById('lg-popover-menu');
+      const backdrop = document.getElementById('lg-popover-backdrop');
+      if (document.querySelectorAll) {
+        document.querySelectorAll('.lg-select-trigger').forEach(b => b.classList && b.classList.remove('is-open'));
+      }
+      activePopoverSelectId = null;
+      if (backdrop) backdrop.classList.add('hidden');
+      if (!menu || menu.classList.contains('hidden')) return;
+      menu.classList.add('is-closing');
+      setTimeout(() => {
+        menu.classList.add('hidden');
+        menu.classList.remove('is-closing');
+      }, 190);
+    }
+
+    function initAuthLiquidSwitcherDrag() {
+      const track = document.getElementById('auth-liquid-track');
+      const pill = document.getElementById('auth-liquid-pill');
+      if (!track || !pill) return;
+      let isDown = false;
+      let isDrag = false;
+      let startX = 0;
+
+      track.addEventListener('pointerdown', e => {
+        isDown = true;
+        isDrag = false;
+        startX = e.clientX || 0;
+      }, { passive: true });
+
+      window.addEventListener('pointermove', e => {
+        if (!isDown || e.clientX === undefined) return;
+        if (!isDrag && Math.abs(e.clientX - startX) >= 6) {
+          isDrag = true;
+        }
+        if (isDrag && track.getBoundingClientRect) {
+          const r = track.getBoundingClientRect();
+          const halfW = r.width / 2;
+          const pct = Math.max(0, Math.min(100, ((e.clientX - r.left - halfW / 2) / (halfW)) * 100));
+          pill.style.transition = 'transform 0.05s linear';
+          pill.style.transform = `translate3d(${pct.toFixed(1)}%, 0, 0) scaleX(1.04) scaleY(1.04)`;
+          const targetMode = (e.clientX - r.left) < halfW ? 'login' : 'register';
+          if (targetMode !== authMode) {
+            switchAuthMode(targetMode, true);
+          }
+        }
+      }, { passive: true });
+
+      const finishAuthDrag = () => {
+        if (!isDown) return;
+        const wasDrag = isDrag;
+        isDown = false;
+        isDrag = false;
+        if (wasDrag) {
+          pill.style.transition = '';
+          switchAuthMode(authMode, false);
+        }
+      };
+      window.addEventListener('pointerup', finishAuthDrag, { passive: true });
+      window.addEventListener('pointercancel', finishAuthDrag, { passive: true });
+    }
+
     function initApp() {
       initSupabaseEngine();
       restoreActiveUserSession();
@@ -2360,13 +2888,14 @@
       updateGlobalBadges();
       renderDashboard();
       applyPracticeFilters();
-      renderBankList();
       switchTab('dashboard');
 
       window.addEventListener('keydown', handleGlobalKeydown);
       window.addEventListener('resize', () => updateLiquidNavPill(activeTab));
       initMobileSwipeGestures();
       initLiquidGlassNavDrag();
+      initAuthLiquidSwitcherDrag();
+      syncLiquidSelects();
       setTimeout(() => updateLiquidNavPill(activeTab), 60);
     }
 
@@ -2450,30 +2979,43 @@
       }
     }
 
+    let lastPillLeft = 0;
+
     function updateLiquidNavPill(tabName, isDragging = false) {
-      // 1. Desktop Liquid Glass Pill
+      // 1. Unified Top Liquid Glass 3D Pill (Desktop & Mobile)
       const pill = document.getElementById('liquid-nav-pill');
       const activeBtn = document.getElementById('nav-' + tabName);
       if (pill && activeBtn) {
         const left = activeBtn.offsetLeft;
         const width = activeBtn.offsetWidth;
+        const deltaX = left - lastPillLeft;
+        lastPillLeft = left;
+
         if (width > 0) {
           pill.style.opacity = '1';
           pill.style.width = `${width}px`;
           if (isDragging) {
-            pill.style.transform = `translate3d(${left}px, 0, 0) scaleX(1.06) scaleY(1.08)`;
+            pill.style.transform = `translate3d(${left}px, 0, 0) scaleX(1.07) scaleY(1.09)`;
           } else {
-            // Brief liquid stretch pulse on quick click glide, then settle to 1.0
-            pill.style.transform = `translate3d(${left}px, 0, 0) scaleX(1.04) scaleY(0.97)`;
+            // 3D Liquid Glass Banking Tilt during quick-click flight, then spring settle to flat 0deg
+            const bankDeg = Math.max(-16, Math.min(16, deltaX * 0.065));
+            pill.style.transform = `translate3d(${left}px, 0, 0) scaleX(1.06) scaleY(0.95)`;
             clearTimeout(pill._settleTimer);
             pill._settleTimer = setTimeout(() => {
               pill.style.transform = `translate3d(${left}px, 0, 0) scaleX(1) scaleY(1)`;
-            }, 220);
+            }, 240);
           }
+        }
+
+        // Smoothly center the active button inside the horizontal nav track on narrow mobile screens
+        if (typeof activeBtn.scrollIntoView === 'function') {
+          try {
+            activeBtn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+          } catch (e) {}
         }
       }
 
-      // 2. Mobile Bottom Dock Liquid Glass Pill
+      // 2. Mobile Secondary Pill Fallback
       const mpill = document.getElementById('mobile-liquid-pill');
       const mBtn = document.getElementById('mnav-' + tabName);
       if (mpill && mBtn) {
@@ -2483,13 +3025,13 @@
           mpill.style.opacity = '1';
           mpill.style.width = `${mWidth}px`;
           const mScaleStr = isDragging ? ' scaleX(1.08) scaleY(1.12)' : '';
-          mpill.style.transform = `translate3d(${mLeft}px, 0, 0)${mScaleStr}`;
+          mpill.style.transform = `perspective(700px) translate3d(${mLeft}px, 0, 0)${mScaleStr}`;
         }
       }
     }
 
     function initLiquidGlassNavDrag() {
-      const views = ['dashboard', 'practice', 'flashcard', 'wrong', 'exam', 'bank'];
+      const views = ['dashboard', 'practice', 'flashcard', 'wrong', 'exam'];
 
       function bindContinuousLiquidTrack(containerId, pillId, btnPrefix) {
         const track = document.getElementById(containerId);
@@ -2509,16 +3051,26 @@
           const currentBtn = document.getElementById(btnPrefix + previewTab) || document.getElementById(btnPrefix + activeTab);
           const pillW = (currentBtn && currentBtn.offsetWidth) ? currentBtn.offsetWidth : 95;
 
-          // Compute exact local X inside track so the Liquid Glass droplet centers smoothly on the user's finger/mouse
+          // Auto-scroll mobile nav bar when dragging near left/right edges
+          if (track.scrollWidth > trackRect.width) {
+            if (clientX - trackRect.left < 42) {
+              track.scrollLeft = Math.max(0, (track.scrollLeft || 0) - 8);
+            } else if (trackRect.right - clientX < 42) {
+              track.scrollLeft = (track.scrollLeft || 0) + 8;
+            }
+          }
+
+          // Compute exact local X inside track so the 3D Liquid Glass droplet centers smoothly on the user's finger/mouse
           const rawX = clientX - trackRect.left + (track.scrollLeft || 0) - (pillW / 2);
           const maxX = Math.max(0, (track.scrollWidth || trackRect.width || 600) - pillW - 4);
           const clampedX = Math.max(4, Math.min(maxX, rawX));
 
-          // Calculate movement velocity for organic liquid stretch (squish/stretch physics)
+          // Calculate movement velocity for 3D banking tilt + organic liquid stretch
           const vx = clientX - lastClientX;
           lastClientX = clientX;
           const stretchX = Math.min(1.18, 1.05 + Math.min(Math.abs(vx) * 0.004, 0.13));
           const squashY = Math.max(0.94, 1.08 - Math.min(Math.abs(vx) * 0.002, 0.10));
+          const tiltY = Math.max(-20, Math.min(20, vx * 1.15));
 
           pill.style.width = `${pillW}px`;
           pill.style.transform = `translate3d(${clampedX.toFixed(1)}px, 0, 0) scaleX(${stretchX.toFixed(3)}) scaleY(${squashY.toFixed(3)})`;
@@ -2550,7 +3102,7 @@
           lastClientX = startClientX;
           previewTab = activeTab;
           clearTimeout(holdTimer);
-          // Only inflate droplet on long-hold (>= 160ms) WITHOUT jumping position on a quick tap!
+          // Only inflate droplet in 3D on long-hold (>= 160ms) WITHOUT jumping position on a quick tap!
           holdTimer = setTimeout(() => {
             if (isPointerDown && !isDragging) {
               updateLiquidNavPill(activeTab, true);
@@ -2561,7 +3113,6 @@
         window.addEventListener('pointermove', e => {
           if (!isPointerDown || e.clientX === undefined) return;
           const distFromStart = Math.abs(e.clientX - startClientX);
-          // Only enter 1:1 drag mode after moving at least 6px
           if (!isDragging && distFromStart >= 6) {
             isDragging = true;
             clearTimeout(holdTimer);
@@ -2592,20 +3143,59 @@
       bindContinuousLiquidTrack('mobile-nav-container', 'mobile-liquid-pill', 'mnav-');
     }
 
+    function getActiveDraggableCard() {
+      if (activeTab === 'practice') return document.getElementById('practice-question-card');
+      if (activeTab === 'flashcard') return document.getElementById('flashcard-stage-wrap');
+      if (activeTab === 'wrong' && appState.wrongSet.length > 0) return document.getElementById('wrong-question-card');
+      if (activeTab === 'exam' && currentExam.active && !currentExam.submitted) return document.getElementById('exam-question-card');
+      return document.getElementById('view-' + activeTab);
+    }
+
     function initMobileSwipeGestures() {
       let touchStartX = 0;
       let touchStartY = 0;
+      let isSwipingCard = false;
+      let activeCardEl = null;
+
       document.addEventListener('touchstart', e => {
         if (!e.touches || e.touches.length !== 1) return;
+        // Ignore if touching inside the top navigation bar or horizontal quick strip
+        if (e.target && e.target.closest && (e.target.closest('#desktop-nav-container') || e.target.closest('#exam-mobile-quick-strip'))) {
+          isSwipingCard = false;
+          return;
+        }
         touchStartX = e.touches[0].clientX;
         touchStartY = e.touches[0].clientY;
+        isSwipingCard = true;
+        activeCardEl = getActiveDraggableCard();
+      }, { passive: true });
+
+      document.addEventListener('touchmove', e => {
+        if (!isSwipingCard || !e.touches || e.touches.length !== 1 || appState.prefs.lowSpecMode) return;
+        const dx = e.touches[0].clientX - touchStartX;
+        const dy = e.touches[0].clientY - touchStartY;
+        // Only apply live 3D card tilt-follow when horizontal movement dominates vertical scroll
+        if (Math.abs(dx) > 14 && Math.abs(dx) > Math.abs(dy) * 1.25 && activeCardEl && activeCardEl.style) {
+          const clampedDx = Math.max(-95, Math.min(95, dx * 0.36));
+          const rotY = Math.max(-11, Math.min(11, dx * 0.065));
+          const tz = -Math.min(45, Math.abs(dx) * 0.25);
+          activeCardEl.style.transition = 'transform 0.05s linear';
+          activeCardEl.style.transform = `perspective(1200px) translate3d(${clampedDx.toFixed(1)}px, 0, ${tz.toFixed(1)}px) rotateY(${rotY.toFixed(2)}deg)`;
+        }
       }, { passive: true });
 
       document.addEventListener('touchend', e => {
+        if (!isSwipingCard) return;
+        isSwipingCard = false;
+        if (activeCardEl && activeCardEl.style) {
+          activeCardEl.style.transition = 'transform 0.42s cubic-bezier(0.22, 1, 0.36, 1)';
+          activeCardEl.style.transform = '';
+        }
         if (!e.changedTouches || e.changedTouches.length !== 1) return;
         const dx = e.changedTouches[0].clientX - touchStartX;
         const dy = e.changedTouches[0].clientY - touchStartY;
-        if (Math.abs(dx) < 65 || Math.abs(dy) > 50) return;
+        if (Math.abs(dx) < 58 || Math.abs(dy) > 55) return;
+
         if (activeTab === 'practice') {
           navigatePractice(dx < 0 ? 1 : -1);
         } else if (activeTab === 'flashcard') {
@@ -2614,13 +3204,60 @@
           navigateWrong(dx < 0 ? 1 : -1);
         } else if (activeTab === 'exam' && currentExam.active && !currentExam.submitted) {
           navigateExam(dx < 0 ? 1 : -1);
+        } else {
+          // On Dashboard or Bank view, horizontal swipe switches between adjacent tabs in 3D!
+          const views = ['dashboard', 'practice', 'flashcard', 'wrong', 'exam'];
+          const currIdx = views.indexOf(activeTab);
+          const nextIdx = dx < 0 ? Math.min(views.length - 1, currIdx + 1) : Math.max(0, currIdx - 1);
+          if (nextIdx !== currIdx) switchTab(views[nextIdx]);
         }
+      }, { passive: true });
+
+      // Zero-Lag rAF-Throttled Specular Light Glint & 3D Interactive Card Tilt (60/120fps)
+      let glintRafPending = false;
+      let latestPointerEv = null;
+      document.addEventListener('pointermove', e => {
+        if (appState.prefs.lowSpecMode) return;
+        latestPointerEv = e;
+        if (glintRafPending) return;
+        glintRafPending = true;
+        requestAnimationFrame(() => {
+          glintRafPending = false;
+          const ev = latestPointerEv;
+          if (!ev || !ev.target || !ev.target.closest) return;
+          const card = ev.target.closest('.smooth-card');
+          if (!card || !card.getBoundingClientRect) return;
+          const rect = card.getBoundingClientRect();
+          if (rect.width <= 0 || rect.height <= 0) return;
+          const relX = ((ev.clientX - rect.left) / rect.width) * 100;
+          const relY = ((ev.clientY - rect.top) / rect.height) * 100;
+          card.style.setProperty('--glint-x', `${relX.toFixed(1)}%`);
+          card.style.setProperty('--glint-y', `${relY.toFixed(1)}%`);
+          card.style.setProperty('--glint-opacity', '0.62');
+
+          if (card.classList.contains('interactive-card')) {
+            const tiltX = ((0.5 - (ev.clientY - rect.top) / rect.height) * 7.5).toFixed(2);
+            const tiltY = (((ev.clientX - rect.left) / rect.width - 0.5) * 7.5).toFixed(2);
+            card.style.transform = `perspective(1000px) translate3d(0, -4px, 10px) rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
+          }
+        });
+      }, { passive: true });
+
+      document.addEventListener('pointerover', e => {
+        if (appState.prefs.lowSpecMode || !e.target || !e.target.closest) return;
+        const prev = document.querySelector('.interactive-card[data-tilted="1"]');
+        if (prev && !prev.contains(e.target)) {
+          prev.style.transform = '';
+          prev.removeAttribute('data-tilted');
+        }
+        const icard = e.target.closest('.interactive-card');
+        if (icard) icard.setAttribute('data-tilted', '1');
       }, { passive: true });
     }
 
     function switchTab(tabName, isDragging = false) {
       cancelAutoSkip();
-      const views = ['dashboard', 'practice', 'flashcard', 'wrong', 'exam', 'bank'];
+      const views = ['dashboard', 'practice', 'flashcard', 'wrong', 'exam'];
       const oldIdx = views.indexOf(activeTab);
       const newIdx = views.indexOf(tabName);
       const morphCls = (newIdx >= oldIdx) ? 'liquid-view-enter-right' : 'liquid-view-enter-left';
@@ -2667,7 +3304,6 @@
       if (tabName === 'flashcard') renderFlashcardView();
       if (tabName === 'wrong') renderWrongView();
       if (tabName === 'exam') renderExamSection();
-      if (tabName === 'bank') renderBankList();
       window.scrollTo({ top: 0, behavior: appState.prefs.lowSpecMode ? 'auto' : 'smooth' });
     }
 
@@ -2813,6 +3449,7 @@
     }
 
     function applyPracticeFilters() {
+      syncLiquidSelects();
       cancelAutoSkip();
       const chapVal = document.getElementById('filter-chapter').value;
       const levelVal = document.getElementById('filter-level').value;
@@ -3084,6 +3721,7 @@
     }
 
     function applyFlashcardFilter() {
+      syncLiquidSelects();
       const val = document.getElementById('fc-filter-select')?.value || 'all';
       let list = QUESTIONS_DATA.filter(q => {
         if (val === 'unmastered') return !appState.masteredSet.includes(q.id);
@@ -3122,6 +3760,7 @@
       const inner = document.getElementById('fc-card-inner');
       if (inner) inner.classList.remove('is-flipped');
       flashcardIndex = (flashcardIndex + delta + flashcardList.length) % flashcardList.length;
+      triggerCardSlideAnimation('flashcard-stage-wrap', delta);
       renderFlashcardView();
     }
 
@@ -3744,66 +4383,6 @@
 
     function retryExamWrongQuestions() {
       switchTab('wrong');
-    }
-
-    // ---------------- QUESTION BANK EXPLORER (200) ----------------
-    function renderBankList() {
-      const query = (document.getElementById('bank-search-input')?.value || '').trim().toLowerCase();
-      const chap = document.getElementById('bank-chapter-select')?.value || 'all';
-      const lvl = document.getElementById('bank-level-select')?.value || 'all';
-      const showAns = document.getElementById('toggle-bank-show-ans')?.checked;
-
-      const filtered = QUESTIONS_DATA.filter(q => {
-        if (chap !== 'all' && q.chapterId !== Number(chap)) return false;
-        if (lvl !== 'all' && q.level !== Number(lvl)) return false;
-        if (query) {
-          const matchId = String(q.id) === query || `câu ${q.id}` === query;
-          const matchText = q.question.toLowerCase().includes(query) ||
-                            Object.values(q.options).some(v => v.toLowerCase().includes(query)) ||
-                            q.explanation.toLowerCase().includes(query);
-          return matchId || matchText;
-        }
-        return true;
-      });
-
-      document.getElementById('bank-found-count').textContent = filtered.length;
-
-      const html = filtered.map(q => `
-        <div class="smooth-card rounded-2xl p-4 sm:p-5 space-y-3">
-          <div class="flex flex-wrap items-center justify-between gap-2">
-            <div class="flex items-center gap-2">
-              <span class="px-2.5 py-0.5 rounded-lg bg-[#1B4330] text-white font-bold text-xs">Câu ${q.id}</span>
-              <span class="px-2 py-0.5 rounded bg-walnut-50 text-walnut-700 text-xs font-semibold border border-walnut-100">Chương ${q.chapterId}</span>
-              <span class="px-2 py-0.5 rounded bg-forest-50 text-forest-700 text-xs font-semibold">${q.levelName}</span>
-            </div>
-            <button onclick="openQuestionInPractice(${q.id})" class="text-xs font-bold text-forest-700 hover:underline">
-              Luyện câu này →
-            </button>
-          </div>
-          <p class="font-semibold text-sm sm:text-base text-[#23170E] vn-question-stem">${q.question}</p>
-          ${showAns ? `
-            <div class="p-3.5 rounded-xl bg-[#F4EFE6] border border-[#D8C8B0] text-xs sm:text-sm text-walnut-900 space-y-2.5">
-              <div class="p-2.5 rounded-lg bg-amber-50 border border-amber-300 text-amber-950 font-bold text-xs">⚡ ${q.mnemonicTip || ''}</div>
-              <div class="vn-body-text"><strong class="text-forest-800">✓ Giải thích trọng tâm (Đáp án ${q.answer.toUpperCase()}):</strong> ${q.explanation}</div>
-              <div class="pt-2 border-t border-[#D8C8B0] space-y-1.5">
-                <p class="text-[11px] font-bold uppercase text-walnut-700">Phân tích đúng/sai từng phương án A, B, C, D:</p>
-                <div class="grid grid-cols-1 gap-1.5 text-xs">${buildOptionsBreakdownHtml(q, null)}</div>
-              </div>
-              <div class="text-xs text-walnut-700 pt-1 vn-body-text"><strong class="text-forest-800">Trọng tâm kiến thức:</strong> ${q.keyTakeaway || ''}</div>
-            </div>
-          ` : `
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs sm:text-sm">
-              ${['a', 'b', 'c', 'd'].map(k => `
-                <div class="p-3 rounded-xl border border-[#E5DAC8] bg-[#FDFBF7] text-walnut-800 vn-body-text">
-                  <span class="uppercase font-bold mr-1.5">${k}.</span>${q.options[k]}
-                </div>
-              `).join('')}
-            </div>
-          `}
-        </div>
-      `).join('');
-
-      document.getElementById('bank-questions-container').innerHTML = html;
     }
 
     function openQuestionInPractice(qId) {
