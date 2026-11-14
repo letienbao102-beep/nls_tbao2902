@@ -67,6 +67,12 @@
     }
     html {
       font-size: var(--base-font-size);
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden;
+      overflow-x: clip;
+      overscroll-behavior-x: none;
+      -webkit-text-size-adjust: 100%;
     }
 
     body {
@@ -78,7 +84,20 @@
       font-feature-settings: "kern" 1, "liga" 1;
       line-height: 1.6;
       letter-spacing: -0.005em;
+      width: 100%;
+      max-width: 100%;
+      margin: 0;
+      padding: 0;
+      position: relative;
       overflow-x: hidden;
+      overflow-x: clip;
+      overscroll-behavior-x: none;
+      touch-action: pan-y pinch-zoom;
+    }
+
+    header, main, section {
+      max-width: 100%;
+      box-sizing: border-box;
     }
 
     /* Low-Spec Mode: Zero lag for older machines */
@@ -109,77 +128,65 @@
       border-color: #9E8569;
     }
 
-    /* View & Question Slide Transitions */
+    /* View & Question Silky-Soft Fluid Transitions */
     .fade-slide-enter {
-      animation: fadeSlideIn var(--anim-speed) cubic-bezier(0.22, 1, 0.36, 1) forwards;
+      animation: fadeSlideIn 0.42s cubic-bezier(0.22, 1, 0.36, 1) forwards;
     }
     @keyframes fadeSlideIn {
       from {
         opacity: 0;
-        transform: translate3d(0, 12px, 0);
+        transform: translate3d(0, 10px, 0) scale(0.992);
       }
       to {
         opacity: 1;
-        transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0) scale(1);
       }
     }
 
-    /* 3D Liquid Glass Card Spatial Swing (Zero Z-Plane Clipping) */
+    /* Silky-Soft Card Glide (Zero Abrupt Snap) */
     .slide-next-anim {
       transform-origin: center center;
-      animation: slideFromRight3D 0.44s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+      animation: slideFromRightSoft 0.42s cubic-bezier(0.22, 1, 0.36, 1) forwards;
     }
-    @keyframes slideFromRight3D {
+    @keyframes slideFromRightSoft {
       0% {
         opacity: 0;
-        transform: perspective(1200px) translate3d(34px, 4px, 0) rotateY(-8deg) rotateX(2deg) scale(0.968);
-      }
-      65% {
-        opacity: 1;
-        transform: perspective(1200px) translate3d(-2px, -1px, 0) rotateY(1.2deg) rotateX(-0.4deg) scale(1.004);
+        transform: translate3d(20px, 3px, 0) scale(0.986);
       }
       100% {
         opacity: 1;
-        transform: perspective(1200px) translate3d(0, 0, 0) rotateY(0deg) rotateX(0deg) scale(1);
+        transform: translate3d(0, 0, 0) scale(1);
       }
     }
 
     .slide-prev-anim {
       transform-origin: center center;
-      animation: slideFromLeft3D 0.44s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+      animation: slideFromLeftSoft 0.42s cubic-bezier(0.22, 1, 0.36, 1) forwards;
     }
-    @keyframes slideFromLeft3D {
+    @keyframes slideFromLeftSoft {
       0% {
         opacity: 0;
-        transform: perspective(1200px) translate3d(-34px, 4px, 0) rotateY(8deg) rotateX(2deg) scale(0.968);
-      }
-      65% {
-        opacity: 1;
-        transform: perspective(1200px) translate3d(2px, -1px, 0) rotateY(-1.2deg) rotateX(-0.4deg) scale(1.004);
+        transform: translate3d(-20px, 3px, 0) scale(0.986);
       }
       100% {
         opacity: 1;
-        transform: perspective(1200px) translate3d(0, 0, 0) rotateY(0deg) rotateX(0deg) scale(1);
+        transform: translate3d(0, 0, 0) scale(1);
       }
     }
 
-    /* 3D Staggered Option Cascade (Zero Z-Plane Clipping) */
-    .stagger-opt-0 { animation: optEntrance3D 0.34s cubic-bezier(0.22, 1, 0.36, 1) 0.01s both; }
-    .stagger-opt-1 { animation: optEntrance3D 0.34s cubic-bezier(0.22, 1, 0.36, 1) 0.04s both; }
-    .stagger-opt-2 { animation: optEntrance3D 0.34s cubic-bezier(0.22, 1, 0.36, 1) 0.07s both; }
-    .stagger-opt-3 { animation: optEntrance3D 0.34s cubic-bezier(0.22, 1, 0.36, 1) 0.10s both; }
-    @keyframes optEntrance3D {
+    /* Cushioned Staggered Option Cascade */
+    .stagger-opt-0 { animation: optEntranceSoft 0.38s cubic-bezier(0.22, 1, 0.36, 1) 0.01s both; }
+    .stagger-opt-1 { animation: optEntranceSoft 0.38s cubic-bezier(0.22, 1, 0.36, 1) 0.045s both; }
+    .stagger-opt-2 { animation: optEntranceSoft 0.38s cubic-bezier(0.22, 1, 0.36, 1) 0.08s both; }
+    .stagger-opt-3 { animation: optEntranceSoft 0.38s cubic-bezier(0.22, 1, 0.36, 1) 0.115s both; }
+    @keyframes optEntranceSoft {
       0% {
         opacity: 0;
-        transform: perspective(900px) translate3d(0, 10px, 0) rotateX(-6deg) scale(0.98);
-      }
-      70% {
-        opacity: 1;
-        transform: perspective(900px) translate3d(0, -1px, 0) rotateX(0.8deg) scale(1.003);
+        transform: translate3d(0, 8px, 0) scale(0.99);
       }
       100% {
         opacity: 1;
-        transform: perspective(900px) translate3d(0, 0, 0) rotateX(0deg) scale(1);
+        transform: translate3d(0, 0, 0) scale(1);
       }
     }
 
@@ -262,7 +269,7 @@
       grid-template-columns: 1fr;
       width: 100%;
       transform-style: preserve-3d;
-      transition: transform 0.56s cubic-bezier(0.22, 1, 0.36, 1);
+      transition: transform 0.76s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .flashcard-inner.is-flipped {
       transform: rotateY(180deg);
@@ -361,78 +368,65 @@
       border-color: rgba(158, 133, 105, 0.9);
     }
 
-    /* Liquid Glass Sliding Pill Indicator in Navigation */
+    /* iOS 26 Liquid Glass Capsule Track & Transparent Water-Droplet Magnifying Lens */
     .liquid-nav-track {
       position: relative;
-      background: rgba(14, 36, 25, 0.55);
-      backdrop-filter: blur(14px) saturate(160%);
-      -webkit-backdrop-filter: blur(14px) saturate(160%);
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.12), 0 4px 16px rgba(0, 0, 0, 0.18);
-    }
-    #liquid-nav-pill {
-      position: absolute;
-      top: 4px;
-      bottom: 4px;
-      left: 0;
-      width: 0;
-      border-radius: 0.65rem;
-      background: linear-gradient(135deg, rgba(250, 243, 232, 0.97) 0%, rgba(230, 216, 195, 0.93) 100%);
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.95);
-      transition: transform 0.46s var(--spring-bouncy), width 0.42s var(--spring-fluid), opacity 0.25s ease;
-      pointer-events: none;
-      z-index: 0;
+      border-radius: 9999px;
+      background: linear-gradient(180deg, rgba(16, 40, 28, 0.72) 0%, rgba(11, 29, 20, 0.82) 100%);
+      backdrop-filter: blur(22px) saturate(185%);
+      -webkit-backdrop-filter: blur(22px) saturate(185%);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      box-shadow: inset 0 1.5px 2px rgba(255, 255, 255, 0.18),
+                  inset 0 -1px 2px rgba(0, 0, 0, 0.35),
+                  0 8px 24px -4px rgba(0, 0, 0, 0.28);
     }
     .nav-tab-btn {
       position: relative;
-      z-index: 1;
-      transition: color 0.28s ease, transform 0.24s var(--spring-fluid);
+      z-index: 2;
+      border-radius: 9999px;
+      color: rgba(220, 234, 226, 0.76);
+      transform-origin: center center;
+      will-change: transform, color, filter;
     }
-    .nav-tab-btn:active {
-      transform: scale(0.95);
+    .nav-tab-btn svg {
+      will-change: transform;
     }
 
     /* 3D Stage Container for Main Views */
     main {
       perspective: 1400px;
+      overflow-x: hidden;
+      overflow-x: clip;
     }
 
-    /* 3D Liquid Glass View Morph Transition (Zero Z-Plane Slicing on Desktop & Mobile) */
+    /* Silky-Soft View Morph Transition */
     .liquid-view-enter-right {
       transform-origin: center top;
-      animation: liquidMorphRight3D 0.48s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+      animation: liquidMorphRightSoft 0.42s cubic-bezier(0.22, 1, 0.36, 1) forwards;
     }
-    @keyframes liquidMorphRight3D {
+    @keyframes liquidMorphRightSoft {
       0% {
         opacity: 0;
-        transform: perspective(1400px) translate3d(38px, 8px, 0) rotateY(-7deg) rotateX(2deg) scale(0.965);
-      }
-      65% {
-        opacity: 1;
-        transform: perspective(1400px) translate3d(-3px, -1px, 0) rotateY(1deg) rotateX(-0.4deg) scale(1.005);
+        transform: translate3d(18px, 4px, 0) scale(0.988);
       }
       100% {
         opacity: 1;
-        transform: perspective(1400px) translate3d(0, 0, 0) rotateY(0deg) rotateX(0deg) scale(1);
+        transform: translate3d(0, 0, 0) scale(1);
       }
     }
 
     .liquid-view-enter-left {
       transform-origin: center top;
-      animation: liquidMorphLeft3D 0.48s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+      animation: liquidMorphLeftSoft 0.42s cubic-bezier(0.22, 1, 0.36, 1) forwards;
     }
-    @keyframes liquidMorphLeft3D {
+    @keyframes liquidMorphLeftSoft {
       0% {
         opacity: 0;
-        transform: perspective(1400px) translate3d(-38px, 8px, 0) rotateY(7deg) rotateX(2deg) scale(0.965);
-      }
-      65% {
-        opacity: 1;
-        transform: perspective(1400px) translate3d(3px, -1px, 0) rotateY(-1deg) rotateX(-0.4deg) scale(1.005);
+        transform: translate3d(-18px, 4px, 0) scale(0.988);
       }
       100% {
         opacity: 1;
-        transform: perspective(1400px) translate3d(0, 0, 0) rotateY(0deg) rotateX(0deg) scale(1);
+        transform: translate3d(0, 0, 0) scale(1);
       }
     }
 
@@ -607,70 +601,65 @@
     }
 
     
-    /* ==================== INTERACTIVE LIQUID GLASS DRAG DROPLET (DESKTOP & MOBILE) ==================== */
-    .liquid-nav-track {
-      perspective: 800px;
-    }
+    /* ==================== INTERACTIVE LIQUID GLASS WATER-DROPLET LENS (VIDEO-ACCURATE) ==================== */
     #liquid-nav-pill {
       position: absolute;
-      top: 4px;
-      bottom: 4px;
+      top: 3px;
+      bottom: 3px;
       left: 0;
       width: 0;
-      border-radius: 0.75rem;
-      background: linear-gradient(135deg, rgba(255, 252, 246, 0.97) 0%, rgba(232, 217, 194, 0.91) 100%);
-      box-shadow: 0 8px 20px -2px rgba(0, 0, 0, 0.32),
-                  0 0 12px rgba(255, 248, 231, 0.28),
-                  inset 0 2px 3px rgba(255, 255, 255, 1),
-                  inset 0 -1px 2px rgba(180, 152, 118, 0.45);
-      transition: transform 0.52s cubic-bezier(0.28, 1.38, 0.52, 1),
-                  width 0.44s cubic-bezier(0.22, 1, 0.36, 1),
-                  box-shadow 0.28s ease,
-                  background 0.28s ease;
+      border-radius: 9999px;
+      /* Resting state: soft translucent glass capsule like 00:00 and 00:10 in video */
+      background: radial-gradient(120% 130% at 50% 15%, rgba(255, 255, 255, 0.24) 0%, rgba(255, 255, 255, 0.09) 60%, rgba(250, 204, 21, 0.12) 100%);
+      border: 1.25px solid rgba(255, 255, 255, 0.52);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.24),
+                  inset 0 1.5px 3px rgba(255, 255, 255, 0.75),
+                  inset 0 -1px 2.5px rgba(250, 204, 21, 0.20);
       pointer-events: none;
-      z-index: 0;
-      transform-style: preserve-3d;
-      will-change: transform, width;
+      z-index: 1;
+      will-change: transform, width, border-color, box-shadow, background;
+      transition: border-color 0.38s cubic-bezier(0.22, 1, 0.36, 1),
+                  box-shadow 0.38s cubic-bezier(0.22, 1, 0.36, 1),
+                  background 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    /* Inflated Transparent Water-Droplet Lens with Chromatic Dispersion Rim (like 00:02 - 00:09 in video) */
+    .is-dragging-glass #liquid-nav-pill,
+    #liquid-nav-pill.is-gliding-lens {
+      background: radial-gradient(115% 135% at 50% 14%, rgba(255, 255, 255, 0.36) 0%, rgba(255, 255, 255, 0.07) 56%, rgba(250, 204, 21, 0.18) 100%) !important;
+      backdrop-filter: blur(8px) saturate(210%) brightness(1.12);
+      -webkit-backdrop-filter: blur(8px) saturate(210%) brightness(1.12);
+      border: 1.6px solid rgba(255, 255, 255, 0.96) !important;
+      box-shadow: -4px 0 12px rgba(56, 189, 248, 0.58),
+                  4px 0 12px rgba(250, 204, 21, 0.62),
+                  0 10px 28px rgba(0, 0, 0, 0.42),
+                  inset 0 2.5px 5px rgba(255, 255, 255, 1),
+                  inset 0 -2px 5px rgba(250, 204, 21, 0.42) !important;
     }
 
     /* Mobile Bottom Dock Sliding Liquid Glass Pill */
     #mobile-liquid-pill {
       position: absolute;
-      top: 6px;
-      bottom: calc(6px + env(safe-area-inset-bottom, 0px));
+      top: 5px;
+      bottom: calc(5px + env(safe-area-inset-bottom, 0px));
       left: 0;
       width: 0;
-      border-radius: 0.85rem;
-      background: linear-gradient(145deg, rgba(252, 246, 236, 0.95) 0%, rgba(230, 215, 192, 0.90) 100%);
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.32),
-                  inset 0 1.5px 2px rgba(255, 255, 255, 0.98),
-                  0 0 12px rgba(234, 224, 206, 0.35);
-      transition: transform 0.48s cubic-bezier(0.32, 1.42, 0.54, 1),
-                  width 0.42s cubic-bezier(0.22, 1, 0.36, 1),
-                  box-shadow 0.28s ease;
+      border-radius: 9999px;
+      background: radial-gradient(120% 130% at 50% 15%, rgba(255, 255, 255, 0.28) 0%, rgba(255, 255, 255, 0.09) 60%, rgba(250, 204, 21, 0.14) 100%);
+      border: 1.4px solid rgba(255, 255, 255, 0.82);
+      box-shadow: -3px 0 10px rgba(56, 189, 248, 0.45),
+                  3px 0 10px rgba(250, 204, 21, 0.48),
+                  0 6px 20px rgba(0, 0, 0, 0.32),
+                  inset 0 2px 3px rgba(255, 255, 255, 0.95);
       pointer-events: none;
-      z-index: 0;
+      z-index: 1;
       will-change: transform, width;
     }
 
-    /* Continuous 1:1 Finger/Mouse Tracking Liquid Glass Lens (Active ONLY during actual drag) */
-    .is-dragging-glass #liquid-nav-pill,
-    .is-dragging-glass #mobile-liquid-pill {
-      transition: transform 0.06s linear,
-                  width 0.16s cubic-bezier(0.22, 1, 0.36, 1),
-                  box-shadow 0.2s ease,
-                  background 0.2s ease !important;
-      background: linear-gradient(135deg, rgba(255, 253, 248, 0.94) 0%, rgba(236, 222, 200, 0.88) 100%) !important;
-      backdrop-filter: blur(20px) saturate(210%);
-      -webkit-backdrop-filter: blur(20px) saturate(210%);
-      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.36),
-                  0 0 20px rgba(252, 211, 77, 0.44),
-                  inset 0 2px 4px rgba(255, 255, 255, 1) !important;
-    }
     .nav-tab-btn {
       user-select: none;
       -webkit-user-select: none;
-      touch-action: pan-x;
+      touch-action: pan-y;
     }
 
     .mnav-btn {
@@ -785,20 +774,22 @@
       }
     }
 
-    /* Sliding Liquid Glass Pill inside Popover Menu */
+    /* Sliding Liquid Glass Water-Droplet Pill inside Popover Menu */
     #lg-popover-pill {
       position: absolute;
       left: 6px;
       right: 6px;
       top: 0;
       height: 38px;
-      border-radius: 0.85rem;
-      background: linear-gradient(135deg, rgba(27, 67, 48, 0.13) 0%, rgba(46, 107, 78, 0.20) 100%);
-      border: 1px solid rgba(46, 107, 78, 0.28);
-      box-shadow: 0 4px 12px rgba(27, 67, 48, 0.08),
-                  inset 0 1px 2px rgba(255, 255, 255, 0.85);
-      transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
-                  height 0.22s cubic-bezier(0.22, 1, 0.36, 1),
+      border-radius: 9999px;
+      background: radial-gradient(120% 130% at 50% 15%, rgba(255, 255, 255, 0.72) 0%, rgba(255, 255, 255, 0.32) 60%, rgba(46, 107, 78, 0.16) 100%);
+      border: 1.5px solid rgba(255, 255, 255, 0.96);
+      box-shadow: -3px 0 9px rgba(56, 189, 248, 0.38),
+                  3px 0 9px rgba(250, 204, 21, 0.42),
+                  0 6px 16px rgba(27, 67, 48, 0.12),
+                  inset 0 2px 3px rgba(255, 255, 255, 1);
+      transition: transform 0.32s cubic-bezier(0.28, 1.36, 0.52, 1),
+                  height 0.24s cubic-bezier(0.22, 1, 0.36, 1),
                   opacity 0.18s ease;
       pointer-events: none;
       z-index: 0;
@@ -849,15 +840,18 @@
     }
     #auth-liquid-pill {
       position: absolute;
-      top: 4px;
-      bottom: 4px;
+      top: 3px;
+      bottom: 3px;
       left: 4px;
       width: calc(50% - 4px);
-      border-radius: 0.85rem;
-      background: linear-gradient(135deg, #1B4330 0%, #2E6B4E 100%);
-      box-shadow: 0 4px 14px rgba(27, 67, 48, 0.32),
-                  inset 0 1.5px 2px rgba(255, 255, 255, 0.38);
-      transition: transform 0.46s cubic-bezier(0.32, 1.38, 0.54, 1),
+      border-radius: 9999px;
+      background: radial-gradient(120% 130% at 50% 15%, rgba(255, 255, 255, 0.72) 0%, rgba(255, 255, 255, 0.35) 60%, rgba(46, 107, 78, 0.18) 100%);
+      border: 1.5px solid rgba(255, 255, 255, 0.96);
+      box-shadow: -3px 0 10px rgba(56, 189, 248, 0.38),
+                  3px 0 10px rgba(250, 204, 21, 0.42),
+                  0 6px 18px rgba(27, 67, 48, 0.18),
+                  inset 0 2px 4px rgba(255, 255, 255, 1);
+      transition: transform 0.48s cubic-bezier(0.28, 1.36, 0.52, 1),
                   box-shadow 0.25s ease;
       pointer-events: none;
       z-index: 0;
@@ -930,18 +924,18 @@
   <!-- Top Header Navigation (Liquid Glass Two-Tier Responsive Layout) -->
   <header class="sticky top-0 z-30 bg-gradient-to-r from-[#143324]/95 via-[#1B4330]/95 to-[#3A2719]/95 backdrop-blur-md text-cream-50 shadow-lg border-b border-white/10">
     <!-- Row 1: Brand Identity + Account Auth & Cloud Sync + Quick Controls -->
-    <div class="max-w-7xl mx-auto px-3 sm:px-6 py-2.5 flex items-center justify-between gap-2 sm:gap-3">
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 py-2 sm:py-2.5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-3 w-full">
       <!-- Brand / University Info -->
-      <div class="flex items-center gap-2.5 sm:gap-3 min-w-0 cursor-pointer group" onclick="switchTab('dashboard')">
-        <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-[#8C6548] to-[#4D3422] border border-[#B58D6D] flex items-center justify-center font-extrabold text-xs sm:text-sm tracking-wider text-cream-50 shrink-0 shadow-inner transition-transform duration-300 group-hover:scale-105">
+      <div class="flex items-center gap-2.5 sm:gap-3 min-w-0 w-full sm:w-auto cursor-pointer group" onclick="switchTab('dashboard')">
+        <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-[#8C6548] to-[#4D3422] border border-[#B58D6D] flex items-center justify-center font-extrabold text-[11px] sm:text-sm tracking-wider text-cream-50 shrink-0 shadow-inner transition-transform duration-300 group-hover:scale-105">
           TNUT
         </div>
-        <div class="min-w-0">
-          <div class="flex flex-wrap items-center gap-2">
-            <h1 class="font-bold text-xs sm:text-base text-cream-50 truncate vn-heading">
+        <div class="min-w-0 flex-1">
+          <div class="flex items-center gap-2 min-w-0">
+            <h1 class="font-bold text-xs sm:text-base text-cream-50 truncate vn-heading min-w-0">
               Ôn Tập Năng Lực Số & Ứng Dụng AI
             </h1>
-            <span class="hidden md:inline-block text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-[#64452E]/90 text-[#F5EFEA] border border-[#9C7354] whitespace-nowrap">
+            <span class="hidden md:inline-block text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-[#64452E]/90 text-[#F5EFEA] border border-[#9C7354] whitespace-nowrap shrink-0">
               ĐH Kỹ thuật Công nghiệp Thái Nguyên
             </span>
           </div>
@@ -952,57 +946,61 @@
       </div>
 
       <!-- Right Controls: Auth Account Pill + Font Size + Low Spec + Reset -->
-      <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
+      <div class="flex items-center justify-between sm:justify-end gap-1.5 sm:gap-2 w-full sm:w-auto shrink-0 pt-1 sm:pt-0 border-t border-white/10 sm:border-t-0">
         <!-- User Account & Cloud Sync Button -->
-        <button id="btn-open-auth" onclick="openAuthModal()" class="px-2.5 sm:px-3.5 py-1.5 rounded-xl text-xs font-bold bg-gradient-to-r from-[#7C583E] to-[#5E402B] hover:from-[#8F674A] hover:to-[#6E4C34] text-amber-100 border border-[#B08868]/70 shadow-sm transition-all duration-200 flex items-center gap-1.5 whitespace-nowrap active:scale-95">
+        <button id="btn-open-auth" onclick="openAuthModal()" class="px-2.5 sm:px-3.5 py-1.5 rounded-xl text-[11px] sm:text-xs font-bold bg-gradient-to-r from-[#7C583E] to-[#5E402B] hover:from-[#8F674A] hover:to-[#6E4C34] text-amber-100 border border-[#B08868]/70 shadow-sm transition-all duration-200 flex items-center gap-1.5 whitespace-nowrap active:scale-95 min-w-0">
           <span id="auth-status-dot" class="w-2 h-2 rounded-full bg-amber-300 shrink-0"></span>
           <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
-          <span id="auth-btn-label" class="max-w-[110px] sm:max-w-[160px] truncate">Đăng nhập / Đăng ký</span>
+          <span id="auth-btn-label" class="max-w-[130px] sm:max-w-[160px] truncate">Đăng nhập / Đăng ký</span>
         </button>
 
-        <button id="btn-font-size" onclick="cycleFontSize()" title="Đổi cỡ chữ hiển thị (Vừa / Lớn / Rất lớn)" class="px-2 sm:px-2.5 py-1.5 rounded-xl text-xs font-bold bg-white/10 hover:bg-white/20 text-cream-50 border border-white/15 transition flex items-center gap-1 whitespace-nowrap">
-          <span>Aa</span>
-          <span id="font-size-label" class="hidden xl:inline text-[11px] font-medium">Chữ: Chuẩn</span>
-        </button>
+        <div class="flex items-center gap-1.5 shrink-0">
+          <button id="btn-font-size" onclick="cycleFontSize()" title="Đổi cỡ chữ hiển thị (Vừa / Lớn / Rất lớn)" class="px-2 sm:px-2.5 py-1.5 rounded-xl text-[11px] sm:text-xs font-bold bg-white/10 hover:bg-white/20 text-cream-50 border border-white/15 transition flex items-center gap-1 whitespace-nowrap">
+            <span>Aa</span>
+            <span id="font-size-label" class="hidden xl:inline text-[11px] font-medium">Chữ: Chuẩn</span>
+          </button>
 
-        <button id="btn-low-spec" onclick="toggleLowSpecMode()" title="Bật/tắt chế độ siêu mượt cho máy yếu" class="px-2 sm:px-2.5 py-1.5 rounded-xl text-xs font-medium bg-white/10 hover:bg-white/20 text-cream-50 border border-white/15 transition flex items-center gap-1.5 whitespace-nowrap">
-          <span id="low-spec-dot" class="w-2 h-2 rounded-full bg-emerald-300 shrink-0"></span>
-          <span class="hidden lg:inline" id="low-spec-label">Hiệu ứng: Mượt</span>
-        </button>
+          <button id="btn-low-spec" onclick="toggleLowSpecMode()" title="Bật/tắt chế độ siêu mượt cho máy yếu" class="px-2 sm:px-2.5 py-1.5 rounded-xl text-[11px] sm:text-xs font-medium bg-white/10 hover:bg-white/20 text-cream-50 border border-white/15 transition flex items-center gap-1.5 whitespace-nowrap">
+            <span id="low-spec-dot" class="w-2 h-2 rounded-full bg-emerald-300 shrink-0"></span>
+            <span class="hidden lg:inline" id="low-spec-label">Hiệu ứng: Mượt</span>
+          </button>
 
-        <button id="btn-reset-all" onclick="openResetModal()" title="Xóa tiến độ làm lại từ đầu" class="px-2 sm:px-2.5 py-1.5 rounded-xl text-xs font-semibold bg-[#593C27]/90 hover:bg-[#704C32] text-cream-100 border border-[#8E694C]/60 transition whitespace-nowrap">
-          Đặt lại
-        </button>
+          <button id="btn-reset-all" onclick="openResetModal()" title="Xóa tiến độ làm lại từ đầu" class="px-2 sm:px-2.5 py-1.5 rounded-xl text-[11px] sm:text-xs font-semibold bg-[#593C27]/90 hover:bg-[#704C32] text-cream-100 border border-[#8E694C]/60 transition whitespace-nowrap">
+            Đặt lại
+          </button>
+        </div>
       </div>
     </div>
 
-    <!-- Row 2: Unified Liquid Glass Navigation Track (Visible on BOTH Mobile & Desktop right at the top!) -->
+    <!-- Row 2: Unified iOS 26 Liquid Glass Capsule Navigation Track (Fits 100% on Phone & Desktop!) -->
     <div class="bg-[#0F261B]/90 border-t border-white/10">
       <div class="max-w-7xl mx-auto px-2 sm:px-6 py-1.5 flex items-center justify-between gap-2">
-        <nav id="desktop-nav-container" class="liquid-nav-track p-1 rounded-2xl flex items-center gap-0.5 sm:gap-1 overflow-x-auto no-scrollbar w-full sm:w-auto select-none">
-          <!-- Sliding Liquid Glass Highlight Pill -->
+        <nav id="desktop-nav-container" class="liquid-nav-track p-1 rounded-full grid grid-cols-5 sm:flex items-center gap-0.5 sm:gap-1 w-full sm:w-auto select-none">
+          <!-- Sliding Transparent Water-Droplet Highlight Lens -->
           <div id="liquid-nav-pill"></div>
 
-          <button id="nav-dashboard" onclick="switchTab('dashboard')" class="nav-tab-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 whitespace-nowrap shrink-0">
-            <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
-            <span>Tổng quan</span>
+          <button id="nav-dashboard" onclick="switchTab('dashboard')" class="nav-tab-btn px-1 sm:px-4 py-1.5 sm:py-2 rounded-full text-[10px] sm:text-xs font-semibold flex flex-col sm:flex-row items-center justify-center gap-0.5 sm:gap-1.5 whitespace-nowrap min-w-0">
+            <svg class="w-4 h-4 sm:w-3.5 sm:h-3.5 shrink-0" fill="none" stroke="currentColor" stroke-width="2.1" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+            <span class="truncate">Tổng quan</span>
           </button>
-          <button id="nav-practice" onclick="switchTab('practice')" class="nav-tab-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 whitespace-nowrap shrink-0">
-            <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
-            <span>Luyện tập</span>
+          <button id="nav-practice" onclick="switchTab('practice')" class="nav-tab-btn px-1 sm:px-4 py-1.5 sm:py-2 rounded-full text-[10px] sm:text-xs font-semibold flex flex-col sm:flex-row items-center justify-center gap-0.5 sm:gap-1.5 whitespace-nowrap min-w-0">
+            <svg class="w-4 h-4 sm:w-3.5 sm:h-3.5 shrink-0" fill="none" stroke="currentColor" stroke-width="2.1" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+            <span class="truncate">Luyện tập</span>
           </button>
-          <button id="nav-flashcard" onclick="switchTab('flashcard')" class="nav-tab-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 whitespace-nowrap shrink-0">
-            <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-            <span>Flashcard 3D</span>
+          <button id="nav-flashcard" onclick="switchTab('flashcard')" class="nav-tab-btn px-1 sm:px-4 py-1.5 sm:py-2 rounded-full text-[10px] sm:text-xs font-semibold flex flex-col sm:flex-row items-center justify-center gap-0.5 sm:gap-1.5 whitespace-nowrap min-w-0">
+            <svg class="w-4 h-4 sm:w-3.5 sm:h-3.5 shrink-0" fill="none" stroke="currentColor" stroke-width="2.1" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+            <span class="truncate">Flashcard 3D</span>
           </button>
-          <button id="nav-wrong" onclick="switchTab('wrong')" class="nav-tab-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 whitespace-nowrap shrink-0">
-            <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
-            <span>Câu sai</span>
-            <span id="badge-wrong-count" class="px-1.5 py-0.2 rounded-full text-[10px] bg-[#B93829] text-white font-bold">0</span>
+          <button id="nav-wrong" onclick="switchTab('wrong')" class="nav-tab-btn px-1 sm:px-4 py-1.5 sm:py-2 rounded-full text-[10px] sm:text-xs font-semibold flex flex-col sm:flex-row items-center justify-center gap-0.5 sm:gap-1.5 whitespace-nowrap min-w-0 relative">
+            <svg class="w-4 h-4 sm:w-3.5 sm:h-3.5 shrink-0" fill="none" stroke="currentColor" stroke-width="2.1" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+            <div class="flex items-center gap-0.5 min-w-0">
+              <span class="truncate">Câu sai</span>
+              <span id="badge-wrong-count" class="px-1 py-0 rounded-full text-[9px] sm:text-[10px] bg-[#B93829] text-white font-bold leading-tight shrink-0">0</span>
+            </div>
           </button>
-          <button id="nav-exam" onclick="switchTab('exam')" class="nav-tab-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 whitespace-nowrap shrink-0">
-            <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-            <span>Thi thử 50 câu</span>
+          <button id="nav-exam" onclick="switchTab('exam')" class="nav-tab-btn px-1 sm:px-4 py-1.5 sm:py-2 rounded-full text-[10px] sm:text-xs font-semibold flex flex-col sm:flex-row items-center justify-center gap-0.5 sm:gap-1.5 whitespace-nowrap min-w-0">
+            <svg class="w-4 h-4 sm:w-3.5 sm:h-3.5 shrink-0" fill="none" stroke="currentColor" stroke-width="2.1" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            <span class="truncate">Thi thử 50 câu</span>
           </button>
 
         </nav>
@@ -1224,19 +1222,48 @@
           </div>
         </div>
 
+        <!-- Shuffle Controls Bar (Responsive for both Desktop & Mobile) -->
+        <div class="mt-3 pt-2.5 border-t border-[#ECE3D5] flex flex-wrap items-center justify-between gap-2">
+          <div class="flex flex-wrap items-center gap-1.5 sm:gap-2 w-full sm:w-auto">
+            <span class="text-[11px] font-bold text-walnut-700 hidden md:inline mr-0.5">Chế độ trộn:</span>
+
+            <!-- Toggle Shuffle Questions -->
+            <label class="inline-flex items-center gap-1.5 cursor-pointer select-none bg-[#EBF3EE] hover:bg-[#DFECE4] px-2.5 sm:px-3 py-1.5 rounded-xl border border-forest-200 transition flex-1 sm:flex-initial justify-center">
+              <input type="checkbox" id="toggle-shuffle-questions" onchange="toggleShuffleQuestionsFromUI(this.checked)" class="rounded text-forest-700 focus:ring-0 w-3.5 h-3.5">
+              <span class="text-[11px] sm:text-xs font-bold text-forest-900 whitespace-nowrap">🔀 Đảo câu hỏi</span>
+            </label>
+
+            <!-- Toggle Shuffle Options A-D -->
+            <label class="inline-flex items-center gap-1.5 cursor-pointer select-none bg-[#F5EFEA] hover:bg-[#EAE0D5] px-2.5 sm:px-3 py-1.5 rounded-xl border border-walnut-200 transition flex-1 sm:flex-initial justify-center">
+              <input type="checkbox" id="toggle-shuffle-options" onchange="toggleShuffleOptionsFromUI(this.checked)" class="rounded text-walnut-700 focus:ring-0 w-3.5 h-3.5">
+              <span class="text-[11px] sm:text-xs font-bold text-walnut-900 whitespace-nowrap">🔀 Đảo đáp án A–D</span>
+            </label>
+
+            <!-- Instant Reshuffle Button -->
+            <button type="button" id="btn-reshuffle-now" onclick="reshufflePracticeNow()" class="lg-pill-interactive px-2.5 sm:px-3 py-1.5 rounded-xl bg-gradient-to-r from-[#1B4330] to-[#2E6B4E] hover:from-[#24583F] hover:to-[#377D5B] text-white text-[11px] sm:text-xs font-bold shadow-sm transition flex items-center justify-center gap-1 whitespace-nowrap w-full sm:w-auto">
+              <span>🔄</span>
+              <span>Trộn lượt mới</span>
+            </button>
+          </div>
+
+          <div id="shuffle-active-pill" class="hidden sm:inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-[11px] font-bold">
+            <span id="shuffle-status-text">Đang giữ thứ tự chuẩn</span>
+          </div>
+        </div>
+
         <!-- Visual Filter Progress Bar & Streak -->
-        <div class="mt-3 pt-2.5 border-t border-[#ECE3D5] flex flex-wrap items-center justify-between gap-3">
+        <div class="mt-2.5 pt-2.5 border-t border-[#ECE3D5] flex flex-wrap items-center justify-between gap-3">
           <div class="flex items-center gap-3 flex-1 min-w-[200px]">
             <span id="practice-progress-label" class="text-[11px] font-bold text-walnut-700 shrink-0">Tiến độ bộ lọc: 0/200</span>
             <div class="flex-1 h-2 bg-cream-200 rounded-full overflow-hidden">
               <div id="practice-progress-bar" class="h-full bg-gradient-to-r from-forest-600 to-emerald-500 transition-all duration-300" style="width: 0%"></div>
             </div>
           </div>
-          <div class="flex items-center gap-2">
-            <span id="streak-badge" class="px-2.5 py-0.5 rounded-full bg-amber-100 border border-amber-300 text-amber-900 text-xs font-bold">
+          <div class="flex flex-wrap items-center gap-1.5 sm:gap-2 w-full sm:w-auto justify-between sm:justify-end">
+            <span id="streak-badge" class="px-2.5 py-1 rounded-full bg-amber-100 border border-amber-300 text-amber-900 text-[11px] sm:text-xs font-bold whitespace-nowrap">
               Chuỗi đúng liên tiếp: 0 🔥
             </span>
-            <button onclick="switchTab('flashcard')" class="px-2.5 py-0.5 rounded-full bg-forest-50 hover:bg-forest-100 border border-forest-200 text-forest-800 text-xs font-bold transition">
+            <button onclick="switchTab('flashcard')" class="px-2.5 py-1 rounded-full bg-forest-50 hover:bg-forest-100 border border-forest-200 text-forest-800 text-[11px] sm:text-xs font-bold transition whitespace-nowrap">
               ⚡ Học bằng Flashcard 3D →
             </button>
           </div>
@@ -1261,17 +1288,17 @@
                   Cấp độ 1
                 </span>
               </div>
-              <div class="flex items-center gap-2">
-                <span id="pq-status-pill" class="text-xs font-semibold px-2.5 py-1 rounded-full bg-gray-100 text-gray-600">
+              <div class="flex flex-wrap items-center gap-1.5 sm:gap-2 w-full sm:w-auto">
+                <span id="pq-status-pill" class="text-[11px] sm:text-xs font-semibold px-2.5 py-1 rounded-full bg-gray-100 text-gray-600 whitespace-nowrap">
                   Chưa trả lời
                 </span>
-                <button id="btn-bookmark-q" onclick="toggleBookmarkCurrent()" class="px-2.5 py-1 rounded-lg text-xs font-bold border border-[#D4C0A5] bg-cream-50 text-walnut-800 hover:bg-amber-50 transition">
+                <button id="btn-bookmark-q" onclick="toggleBookmarkCurrent()" class="px-2.5 py-1 rounded-lg text-[11px] sm:text-xs font-bold border border-[#D4C0A5] bg-cream-50 text-walnut-800 hover:bg-amber-50 transition whitespace-nowrap">
                   ☆ Ghim câu khó
                 </button>
-                <button id="btn-hint-5050" onclick="useHint5050()" title="Loại trừ 2 phương án sai để dễ suy luận" class="px-2.5 py-1 rounded-lg text-xs font-bold bg-forest-50 hover:bg-forest-100 text-forest-800 border border-forest-200 transition">
+                <button id="btn-hint-5050" onclick="useHint5050()" title="Loại trừ 2 phương án sai để dễ suy luận" class="px-2.5 py-1 rounded-lg text-[11px] sm:text-xs font-bold bg-forest-50 hover:bg-forest-100 text-forest-800 border border-forest-200 transition whitespace-nowrap">
                   💡 Gợi ý 50/50
                 </button>
-                <button id="btn-redo-single" onclick="redoCurrentPracticeQuestion()" class="px-2.5 py-1 rounded-lg text-xs font-semibold bg-[#F3E9DC] hover:bg-[#E5D4BE] text-walnut-800 border border-[#D4C0A5] transition">
+                <button id="btn-redo-single" onclick="redoCurrentPracticeQuestion()" class="px-2.5 py-1 rounded-lg text-[11px] sm:text-xs font-semibold bg-[#F3E9DC] hover:bg-[#E5D4BE] text-walnut-800 border border-[#D4C0A5] transition whitespace-nowrap">
                   ↺ Làm lại câu này
                 </button>
               </div>
@@ -1478,7 +1505,14 @@
               Mọi câu bạn chọn sai trong lúc <strong>Luyện tập</strong> hoặc <strong>Thi thử 50 câu</strong> đều được tự động lưu vào đây. Bạn có thể đọc kỹ phân tích từng phương án A, B, C, D trước khi gỡ câu hỏi khỏi danh sách sai.
             </p>
           </div>
-          <div class="flex flex-wrap items-center gap-2.5 shrink-0">
+          <div class="flex flex-wrap items-center gap-2 shrink-0">
+            <button type="button" onclick="shuffleWrongQuestionsNow()" class="px-3 py-2 rounded-xl bg-[#2E6B4E] hover:bg-[#24583F] border border-emerald-400/40 text-xs font-bold text-white transition flex items-center gap-1.5">
+              <span>🔀 Đảo câu sai</span>
+            </button>
+            <label class="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-[#382518] border border-[#8E694C] text-xs font-semibold text-cream-100 cursor-pointer">
+              <input type="checkbox" id="toggle-wrong-shuffle-opt" onchange="toggleShuffleOptionsFromUI(this.checked)" class="rounded text-amber-500">
+              <span>🔀 Đảo đáp án A–D</span>
+            </label>
             <label class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-[#382518] border border-[#8E694C] text-xs font-semibold text-cream-100 cursor-pointer">
               <input type="checkbox" id="toggle-auto-remove-wrong" class="rounded text-forest-500">
               <span>Tự động gỡ ngay khi chọn Đúng</span>
@@ -1595,22 +1629,34 @@
             </p>
           </div>
 
-          <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 shrink-0">
-            <div class="min-w-[235px]">
-              <label for="exam-duration-select" class="block text-[10px] font-bold uppercase text-walnut-600 mb-1">Thời gian làm bài</label>
-              <button type="button" id="lg-btn-exam-duration-select" onclick="openLiquidGlassPopover('exam-duration-select')" class="lg-select-trigger px-3.5 py-2.5 text-xs sm:text-sm font-bold text-forest-800">
-                <span id="lg-lbl-exam-duration-select" class="truncate">50 phút (Tiêu chuẩn 1 phút/câu)</span>
-                <span class="lg-select-chevron text-forest-700 text-xs shrink-0">▾</span>
+          <div class="flex flex-col gap-3 shrink-0 w-full lg:w-auto">
+            <div class="flex flex-col sm:flex-row items-stretch sm:items-end gap-3">
+              <div class="min-w-[235px] flex-1">
+                <label for="exam-duration-select" class="block text-[10px] font-bold uppercase text-walnut-600 mb-1">Thời gian làm bài</label>
+                <button type="button" id="lg-btn-exam-duration-select" onclick="openLiquidGlassPopover('exam-duration-select')" class="lg-select-trigger px-3.5 py-2.5 text-xs sm:text-sm font-bold text-forest-800">
+                  <span id="lg-lbl-exam-duration-select" class="truncate">50 phút (Tiêu chuẩn 1 phút/câu)</span>
+                  <span class="lg-select-chevron text-forest-700 text-xs shrink-0">▾</span>
+                </button>
+                <select id="exam-duration-select" class="hidden">
+                  <option value="40">40 phút (Luyện tốc độ)</option>
+                  <option value="50" selected>50 phút (Tiêu chuẩn 1 phút/câu)</option>
+                  <option value="60">60 phút (Thong thả)</option>
+                </select>
+              </div>
+              <button onclick="startNewStandardExam()" class="px-6 py-3 rounded-xl bg-[#1B4330] hover:bg-[#24583F] text-white font-bold text-sm shadow-md transition flex items-center justify-center gap-2">
+                <span>▶</span> Bắt đầu làm đề 50 câu mới
               </button>
-              <select id="exam-duration-select" class="hidden">
-                <option value="40">40 phút (Luyện tốc độ)</option>
-                <option value="50" selected>50 phút (Tiêu chuẩn 1 phút/câu)</option>
-                <option value="60">60 phút (Thong thả)</option>
-              </select>
             </div>
-            <button onclick="startNewStandardExam()" class="px-6 py-3.5 rounded-xl bg-[#1B4330] hover:bg-[#24583F] text-white font-bold text-sm shadow-md transition flex items-center justify-center gap-2">
-              <span>▶</span> Bắt đầu làm đề 50 câu mới
-            </button>
+            <div class="flex flex-wrap items-center gap-2">
+              <label class="inline-flex items-center gap-1.5 cursor-pointer select-none bg-forest-50 px-3 py-1.5 rounded-xl border border-forest-200 flex-1 sm:flex-initial justify-center">
+                <input type="checkbox" id="toggle-exam-shuffle-q" onchange="updateExamShufflePrefs()" checked class="rounded text-forest-700 focus:ring-0 w-3.5 h-3.5">
+                <span class="text-xs font-bold text-forest-900">🔀 Đảo thứ tự 50 câu</span>
+              </label>
+              <label class="inline-flex items-center gap-1.5 cursor-pointer select-none bg-[#F5EFEA] px-3 py-1.5 rounded-xl border border-walnut-200 flex-1 sm:flex-initial justify-center">
+                <input type="checkbox" id="toggle-exam-shuffle-opt" onchange="updateExamShufflePrefs()" checked class="rounded text-walnut-700 focus:ring-0 w-3.5 h-3.5">
+                <span class="text-xs font-bold text-walnut-900">🔀 Đảo đáp án A–D</span>
+              </label>
+            </div>
           </div>
         </div>
 
@@ -1872,12 +1918,12 @@
       <!-- Sub-panel A: Guest / Login & Register Tabs (No Admin Account) with Liquid Glass Sliding Pill -->
       <div id="auth-guest-panel" class="space-y-4">
         <!-- Segmented Switcher: Đăng nhập vs Tạo tài khoản mới -->
-        <div id="auth-liquid-track" class="grid grid-cols-2 p-1 rounded-2xl relative">
+        <div id="auth-liquid-track" class="grid grid-cols-2 p-1 rounded-full relative">
           <div id="auth-liquid-pill"></div>
-          <button id="tab-btn-login" onclick="switchAuthMode('login')" class="relative z-10 py-2.5 rounded-xl text-xs font-extrabold transition-colors text-white">
+          <button id="tab-btn-login" onclick="switchAuthMode('login')" class="relative z-10 py-2.5 rounded-full text-xs font-extrabold transition-all text-forest-900 scale-105">
             Đăng nhập tài khoản
           </button>
-          <button id="tab-btn-register" onclick="switchAuthMode('register')" class="relative z-10 py-2.5 rounded-xl text-xs font-bold transition-colors text-walnut-800 hover:text-forest-900">
+          <button id="tab-btn-register" onclick="switchAuthMode('register')" class="relative z-10 py-2.5 rounded-full text-xs font-bold transition-all text-walnut-700 hover:text-forest-900 scale-95">
             Tạo tài khoản mới
           </button>
         </div>
@@ -2109,7 +2155,11 @@
         autoSkipDelay: 2200,
         lowSpecMode: false,
         highlightKeywords: true,
-        fontScaleIndex: 0
+        fontScaleIndex: 0,
+        shuffleQuestions: false,
+        shuffleOptions: false,
+        examShuffleQuestions: true,
+        examShuffleOptions: true
       }
     };
 
@@ -2126,6 +2176,60 @@
     let autoSkipTimer = null;
     let currentStreak = 0;
     let eliminatedHints = {};
+    const DISPLAY_KEYS = ['a', 'b', 'c', 'd'];
+    let optionPermutations = {}; // { [qId]: ['c', 'a', 'd', 'b'] }
+
+    function shuffleArray(arr) {
+      const copy = [...arr];
+      for (let i = copy.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        const tmp = copy[i];
+        copy[i] = copy[j];
+        copy[j] = tmp;
+      }
+      return copy;
+    }
+
+    function generateAllOptionPermutations() {
+      optionPermutations = {};
+      QUESTIONS_DATA.forEach(q => {
+        optionPermutations[q.id] = shuffleArray(DISPLAY_KEYS);
+      });
+    }
+
+    function getOptionOrder(qId) {
+      if (!appState.prefs.shuffleOptions) return DISPLAY_KEYS;
+      if (!optionPermutations[qId]) {
+        optionPermutations[qId] = shuffleArray(DISPLAY_KEYS);
+      }
+      return optionPermutations[qId];
+    }
+
+    function getExamOptionOrder(qId) {
+      if (currentExam && currentExam.optionOrders && currentExam.optionOrders[qId]) {
+        return currentExam.optionOrders[qId];
+      }
+      return DISPLAY_KEYS;
+    }
+
+    function getDisplayLetter(origKey, perm) {
+      if (!origKey) return '';
+      const order = Array.isArray(perm) && perm.length === 4 ? perm : DISPLAY_KEYS;
+      const idx = order.indexOf(String(origKey).toLowerCase());
+      return (idx !== -1 ? DISPLAY_KEYS[idx] : String(origKey)).toUpperCase();
+    }
+
+    function remapExplanationLetters(text, perm) {
+      if (!text) return '';
+      const order = Array.isArray(perm) && perm.length === 4 ? perm : DISPLAY_KEYS;
+      return String(text)
+        .replace(/\b(phương án|đáp án)\s+([A-D])\b/g, (full, prefix, letter) => {
+          return `${prefix} ${getDisplayLetter(letter, order)}`;
+        })
+        .replace(/Mẹo nhớ nhanh\s*\(([A-D])\)/g, (full, letter) => {
+          return `Mẹo nhớ nhanh (${getDisplayLetter(letter, order)})`;
+        });
+    }
     let flashcardList = [...QUESTIONS_DATA];
     let flashcardIndex = 0;
     let flashcardFlipped = false;
@@ -2342,15 +2446,15 @@
 
       // 2. Smoothly expand/collapse the registration fields via pure CSS Grid 0fr <-> 1fr
       if (mode === 'login') {
-        loginBtn.className = 'relative z-10 py-2.5 rounded-xl text-xs font-extrabold transition-colors duration-200 text-white';
-        regBtn.className = 'relative z-10 py-2.5 rounded-xl text-xs font-bold transition-colors duration-200 text-walnut-800 hover:text-forest-900';
+        loginBtn.className = 'relative z-10 py-2.5 rounded-full text-xs font-extrabold transition-all duration-200 text-forest-950 scale-105';
+        regBtn.className = 'relative z-10 py-2.5 rounded-full text-xs font-bold transition-all duration-200 text-walnut-700 hover:text-forest-900 scale-95 opacity-80';
         [nameField, sidField, confField].forEach(el => {
           if (el) el.classList.remove('is-expanded');
         });
         submitBtn.textContent = 'Đăng nhập & Đồng bộ dữ liệu';
       } else {
-        regBtn.className = 'relative z-10 py-2.5 rounded-xl text-xs font-extrabold transition-colors duration-200 text-white';
-        loginBtn.className = 'relative z-10 py-2.5 rounded-xl text-xs font-bold transition-colors duration-200 text-walnut-800 hover:text-forest-900';
+        regBtn.className = 'relative z-10 py-2.5 rounded-full text-xs font-extrabold transition-all duration-200 text-forest-950 scale-105';
+        loginBtn.className = 'relative z-10 py-2.5 rounded-full text-xs font-bold transition-all duration-200 text-walnut-700 hover:text-forest-900 scale-95 opacity-80';
         [nameField, sidField, confField].forEach(el => {
           if (el) el.classList.add('is-expanded');
         });
@@ -2639,11 +2743,13 @@
       return out;
     }
 
-    function buildOptionsBreakdownHtml(q, userChoice) {
+    function buildOptionsBreakdownHtml(q, userChoice, perm) {
       if (!q || !q.optionAnalysis) return '';
-      return ['a', 'b', 'c', 'd'].map(k => {
-        const isCorrectOpt = (k === q.answer);
-        const isUserWrongOpt = (userChoice && userChoice === k && k !== q.answer);
+      const order = Array.isArray(perm) && perm.length === 4 ? perm : DISPLAY_KEYS;
+      return order.map((origKey, idx) => {
+        const dispKey = DISPLAY_KEYS[idx];
+        const isCorrectOpt = (origKey === q.answer);
+        const isUserWrongOpt = (userChoice && userChoice === origKey && origKey !== q.answer);
         let boxCls = 'p-2.5 rounded-xl border bg-white/85 border-[#E2D6C3] text-walnut-800';
         let badgeCls = 'bg-walnut-100 text-walnut-800';
         if (isCorrectOpt) {
@@ -2653,13 +2759,14 @@
           boxCls = 'p-2.5 rounded-xl border bg-red-50/95 border-red-400 text-red-950';
           badgeCls = 'bg-[#C93B2B] text-white';
         }
+        const analysisText = remapExplanationLetters(q.optionAnalysis[origKey], order);
         return `
           <div class="${boxCls} flex items-start gap-2.5 vn-body-text">
-            <span class="px-2 py-0.5 rounded-md text-[11px] font-bold uppercase shrink-0 mt-0.5 ${badgeCls}">${k}</span>
+            <span class="px-2 py-0.5 rounded-md text-[11px] font-bold uppercase shrink-0 mt-0.5 ${badgeCls}">${dispKey}</span>
             <div class="flex-1 min-w-0">
-              <div class="font-semibold text-xs sm:text-sm">${q.options[k]}</div>
+              <div class="font-semibold text-xs sm:text-sm">${q.options[origKey]}</div>
               <div class="mt-1 text-xs ${isCorrectOpt ? 'text-emerald-800 font-semibold' : 'text-walnut-700'}">
-                → ${q.optionAnalysis[k]}
+                → ${analysisText}
               </div>
             </div>
           </div>
@@ -2885,18 +2992,31 @@
       // In Wrong Review mode, default to manual removal so student can read explanation thoroughly
       document.getElementById('toggle-auto-remove-wrong').checked = false;
 
+      if (appState.prefs.shuffleOptions) {
+        generateAllOptionPermutations();
+      }
+      if (appState.prefs.shuffleQuestions) {
+        const orderSel = document.getElementById('filter-order');
+        if (orderSel) orderSel.value = 'random';
+      }
+      const exShufQ = document.getElementById('toggle-exam-shuffle-q');
+      const exShufO = document.getElementById('toggle-exam-shuffle-opt');
+      if (exShufQ) exShufQ.checked = appState.prefs.examShuffleQuestions !== false;
+      if (exShufO) exShufO.checked = appState.prefs.examShuffleOptions !== false;
+      syncShuffleUIControls();
+
       updateGlobalBadges();
       renderDashboard();
       applyPracticeFilters();
       switchTab('dashboard');
 
       window.addEventListener('keydown', handleGlobalKeydown);
-      window.addEventListener('resize', () => updateLiquidNavPill(activeTab));
+      window.addEventListener('resize', () => snapLiquidNavPillImmediate(activeTab));
       initMobileSwipeGestures();
       initLiquidGlassNavDrag();
       initAuthLiquidSwitcherDrag();
       syncLiquidSelects();
-      setTimeout(() => updateLiquidNavPill(activeTab), 60);
+      setTimeout(() => snapLiquidNavPillImmediate(activeTab), 80);
     }
 
     function cycleFontSize() {
@@ -2920,12 +3040,14 @@
       if (!document.getElementById('app-modal').classList.contains('hidden')) return;
 
       const key = e.key.toLowerCase();
-      const mapKey = { '1': 'a', '2': 'b', '3': 'c', '4': 'd', 'a': 'a', 'b': 'b', 'c': 'c', 'd': 'd' };
+      const slotMap = { '1': 0, '2': 1, '3': 2, '4': 3, 'a': 0, 'b': 1, 'c': 2, 'd': 3 };
 
       if (activeTab === 'practice') {
-        if (mapKey[key]) {
+        if (slotMap[key] !== undefined && practiceList.length > 0) {
           e.preventDefault();
-          selectPracticeOption(mapKey[key]);
+          const q = practiceList[practiceIndex];
+          const perm = getOptionOrder(q.id);
+          selectPracticeOption(perm[slotMap[key]]);
         } else if (e.key === 'ArrowRight' || e.key === ' ') {
           e.preventDefault();
           navigatePractice(1);
@@ -2934,9 +3056,11 @@
           navigatePractice(-1);
         }
       } else if (activeTab === 'exam' && currentExam.active && !currentExam.submitted) {
-        if (mapKey[key]) {
+        if (slotMap[key] !== undefined && currentExam.questions.length > 0) {
           e.preventDefault();
-          selectExamOption(mapKey[key]);
+          const q = currentExam.questions[currentExam.currentIndex];
+          const perm = getExamOptionOrder(q.id);
+          selectExamOption(perm[slotMap[key]]);
         } else if (e.key === 'ArrowRight') {
           e.preventDefault();
           navigateExam(1);
@@ -2945,9 +3069,11 @@
           navigateExam(-1);
         }
       } else if (activeTab === 'wrong' && appState.wrongSet.length > 0) {
-        if (mapKey[key]) {
+        if (slotMap[key] !== undefined) {
           e.preventDefault();
-          selectWrongOption(mapKey[key]);
+          const qId = appState.wrongSet[wrongIndex];
+          const perm = getOptionOrder(qId);
+          selectWrongOption(perm[slotMap[key]]);
         } else if (e.key === 'ArrowRight') {
           e.preventDefault();
           navigateWrong(1);
@@ -2979,43 +3105,200 @@
       }
     }
 
-    let lastPillLeft = 0;
+    const NAV_VIEWS = ['dashboard', 'practice', 'flashcard', 'wrong', 'exam'];
+    let navSpringState = {
+      x: 0,
+      w: 80,
+      startX: 0,
+      startW: 80,
+      targetX: 0,
+      targetW: 80,
+      scaleX: 1,
+      scaleY: 1,
+      startTime: 0,
+      duration: 450,
+      lastFrameTime: 0,
+      isDragging: false,
+      rafId: null,
+      initialized: false
+    };
+
+    // Continuous RGB + Quintic Smoothstep Magnification Wave (Silky-soft like the video)
+    function applyNavProximityWave(lensCenterX, lensWidth, btnPrefix = 'nav-') {
+      const radius = Math.max(68, lensWidth * 1.08);
+      for (const v of NAV_VIEWS) {
+        const btn = document.getElementById(btnPrefix + v);
+        if (!btn) continue;
+        const btnCenter = (btn.offsetLeft || 0) + ((btn.offsetWidth || 72) / 2);
+        const dist = Math.abs(lensCenterX - btnCenter);
+        const ratio = Math.max(0, Math.min(1, 1 - dist / radius));
+        // Quintic smoothstep for ultra-soft bell curve (zero sharp edges)
+        const wave = ratio * ratio * ratio * (ratio * (ratio * 6 - 15) + 10);
+
+        const scale = (0.95 + 0.15 * wave).toFixed(3);
+        const ty = (0.6 - 2.0 * wave).toFixed(2);
+        btn.style.transform = `translate3d(0, ${ty}px, 0) scale(${scale})`;
+
+        // Continuous RGB interpolation from soft silver-mint (216, 232, 224) to glowing golden-yellow (253, 224, 71)
+        const r = Math.round(216 + (253 - 216) * wave);
+        const g = Math.round(232 + (224 - 232) * wave);
+        const b = Math.round(224 + (71 - 224) * wave);
+        const alpha = (0.76 + 0.24 * wave).toFixed(2);
+        btn.style.color = `rgba(${r}, ${g}, ${b}, ${alpha})`;
+
+        if (wave > 0.05) {
+          btn.style.filter = `drop-shadow(0 2px ${(6 * wave).toFixed(1)}px rgba(250, 204, 21, ${(0.44 * wave).toFixed(2)}))`;
+        } else {
+          btn.style.filter = 'none';
+        }
+      }
+    }
+
+    // 100% Continuous C-infinity Cosine-Power Easing (Balanced responsive start + silky landing)
+    function viscousGlideEase(t) {
+      if (t <= 0) return 0;
+      if (t >= 1) return 1;
+      return 0.5 * (1 - Math.cos(Math.PI * Math.pow(t, 0.65)));
+    }
+
+    function startNavSpringLoop() {
+      if (navSpringState.rafId) return;
+      navSpringState.lastFrameTime = performance.now();
+      navSpringState.rafId = requestAnimationFrame(stepNavSpringAnimation);
+    }
+
+    function stepNavSpringAnimation(now) {
+      const pill = document.getElementById('liquid-nav-pill');
+      if (!pill) {
+        navSpringState.rafId = null;
+        return;
+      }
+
+      const currentNow = now || performance.now();
+      const dt = Math.min(0.05, Math.max(0.001, (currentNow - (navSpringState.lastFrameTime || currentNow)) / 1000));
+      navSpringState.lastFrameTime = currentNow;
+
+      if (navSpringState.isDragging) {
+        // Balanced fluid follow during finger/mouse drag (responsive yet silky)
+        const followRate = 1 - Math.exp(-13.5 * dt);
+        const rawStepX = (navSpringState.targetX - navSpringState.x) * followRate;
+        const maxStep = 780 * dt;
+        const clampedStepX = Math.max(-maxStep, Math.min(maxStep, rawStepX));
+
+        navSpringState.x += clampedStepX;
+        navSpringState.w += (navSpringState.targetW - navSpringState.w) * followRate;
+
+        const speedNorm = Math.min(1, Math.abs(clampedStepX / dt) / 480);
+        const targetSX = 1.07 + 0.07 * speedNorm;
+        const targetSY = 1.15 + 0.06 * speedNorm;
+        navSpringState.scaleX += (targetSX - navSpringState.scaleX) * (1 - Math.exp(-14 * dt));
+        navSpringState.scaleY += (targetSY - navSpringState.scaleY) * (1 - Math.exp(-14 * dt));
+
+        pill.classList.add('is-gliding-lens');
+        pill.style.width = `${Math.max(40, navSpringState.w).toFixed(1)}px`;
+        pill.style.transform = `translate3d(${navSpringState.x.toFixed(2)}px, 0, 0) scaleX(${navSpringState.scaleX.toFixed(3)}) scaleY(${navSpringState.scaleY.toFixed(3)})`;
+        applyNavProximityWave(navSpringState.x + navSpringState.w / 2, navSpringState.w, 'nav-');
+        navSpringState.rafId = requestAnimationFrame(stepNavSpringAnimation);
+        return;
+      }
+
+      // Balanced Viscous Glide when clicking tabs or releasing drag (410ms - 540ms sweet spot)
+      const elapsed = Math.max(0, currentNow - navSpringState.startTime);
+      const progress = Math.min(1, elapsed / Math.max(380, navSpringState.duration));
+      const eased = viscousGlideEase(progress);
+
+      navSpringState.x = navSpringState.startX + (navSpringState.targetX - navSpringState.startX) * eased;
+      navSpringState.w = navSpringState.startW + (navSpringState.targetW - navSpringState.startW) * eased;
+
+      // Smooth water-droplet swell arch during flight
+      const travelDist = Math.abs(navSpringState.targetX - navSpringState.startX);
+      const distFactor = Math.min(1, travelDist / 120);
+      const swellArch = Math.sin(Math.PI * Math.pow(progress, 0.68));
+      const targetSX = 1 + 0.10 * swellArch * distFactor;
+      const targetSY = 1 + 0.18 * swellArch * distFactor;
+
+      navSpringState.scaleX += (targetSX - navSpringState.scaleX) * (1 - Math.exp(-16 * dt));
+      navSpringState.scaleY += (targetSY - navSpringState.scaleY) * (1 - Math.exp(-16 * dt));
+
+      pill.style.width = `${Math.max(40, navSpringState.w).toFixed(1)}px`;
+      pill.style.transform = `translate3d(${navSpringState.x.toFixed(2)}px, 0, 0) scaleX(${navSpringState.scaleX.toFixed(3)}) scaleY(${navSpringState.scaleY.toFixed(3)})`;
+
+      const lensCenter = navSpringState.x + navSpringState.w / 2;
+      applyNavProximityWave(lensCenter, navSpringState.w, 'nav-');
+
+      if (progress < 0.82 && travelDist > 10) {
+        pill.classList.add('is-gliding-lens');
+      } else {
+        pill.classList.remove('is-gliding-lens');
+      }
+
+      if (progress < 1 || Math.abs(navSpringState.scaleX - 1) > 0.003 || Math.abs(navSpringState.scaleY - 1) > 0.003) {
+        navSpringState.rafId = requestAnimationFrame(stepNavSpringAnimation);
+      } else {
+        navSpringState.x = navSpringState.targetX;
+        navSpringState.w = navSpringState.targetW;
+        navSpringState.scaleX = 1;
+        navSpringState.scaleY = 1;
+        pill.style.width = `${navSpringState.w}px`;
+        pill.style.transform = `translate3d(${navSpringState.x}px, 0, 0) scaleX(1) scaleY(1)`;
+        pill.classList.remove('is-gliding-lens');
+        applyNavProximityWave(navSpringState.x + navSpringState.w / 2, navSpringState.w, 'nav-');
+        navSpringState.rafId = null;
+      }
+    }
+
+    function snapLiquidNavPillImmediate(tabName) {
+      const pill = document.getElementById('liquid-nav-pill');
+      const activeBtn = document.getElementById('nav-' + tabName);
+      if (!pill || !activeBtn) return;
+      const left = activeBtn.offsetLeft;
+      const width = activeBtn.offsetWidth;
+      if (width > 0) {
+        pill.style.opacity = '1';
+        navSpringState.x = left;
+        navSpringState.w = width;
+        navSpringState.startX = left;
+        navSpringState.startW = width;
+        navSpringState.targetX = left;
+        navSpringState.targetW = width;
+        navSpringState.scaleX = 1;
+        navSpringState.scaleY = 1;
+        navSpringState.initialized = true;
+        pill.style.width = `${width}px`;
+        pill.style.transform = `translate3d(${left}px, 0, 0) scaleX(1) scaleY(1)`;
+        applyNavProximityWave(left + width / 2, width, 'nav-');
+      }
+    }
 
     function updateLiquidNavPill(tabName, isDragging = false) {
-      // 1. Unified Top Liquid Glass 3D Pill (Desktop & Mobile)
       const pill = document.getElementById('liquid-nav-pill');
       const activeBtn = document.getElementById('nav-' + tabName);
       if (pill && activeBtn) {
         const left = activeBtn.offsetLeft;
         const width = activeBtn.offsetWidth;
-        const deltaX = left - lastPillLeft;
-        lastPillLeft = left;
 
         if (width > 0) {
           pill.style.opacity = '1';
-          pill.style.width = `${width}px`;
-          if (isDragging) {
-            pill.style.transform = `translate3d(${left}px, 0, 0) scaleX(1.07) scaleY(1.09)`;
-          } else {
-            // 3D Liquid Glass Banking Tilt during quick-click flight, then spring settle to flat 0deg
-            const bankDeg = Math.max(-16, Math.min(16, deltaX * 0.065));
-            pill.style.transform = `translate3d(${left}px, 0, 0) scaleX(1.06) scaleY(0.95)`;
-            clearTimeout(pill._settleTimer);
-            pill._settleTimer = setTimeout(() => {
-              pill.style.transform = `translate3d(${left}px, 0, 0) scaleX(1) scaleY(1)`;
-            }, 240);
+
+          if (!navSpringState.initialized || appState.prefs.lowSpecMode) {
+            snapLiquidNavPillImmediate(tabName);
+          } else if (!isDragging) {
+            // Start a controlled, unhurried 720ms - 960ms viscous glide from current droplet position to target tab
+            navSpringState.startX = navSpringState.x;
+            navSpringState.startW = navSpringState.w;
+            navSpringState.targetX = left;
+            navSpringState.targetW = width;
+            const dist = Math.abs(left - navSpringState.startX);
+            navSpringState.duration = Math.round(410 + Math.min(130, dist * 0.28));
+            navSpringState.startTime = performance.now();
+            startNavSpringLoop();
           }
         }
-
-        // Smoothly center the active button inside the horizontal nav track on narrow mobile screens
-        if (typeof activeBtn.scrollIntoView === 'function') {
-          try {
-            activeBtn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-          } catch (e) {}
-        }
+        if (document.documentElement.scrollLeft !== 0) document.documentElement.scrollLeft = 0;
+        if (document.body.scrollLeft !== 0) document.body.scrollLeft = 0;
       }
 
-      // 2. Mobile Secondary Pill Fallback
+      // Secondary Mobile Pill Fallback
       const mpill = document.getElementById('mobile-liquid-pill');
       const mBtn = document.getElementById('mnav-' + tabName);
       if (mpill && mBtn) {
@@ -3024,15 +3307,13 @@
         if (mWidth > 0) {
           mpill.style.opacity = '1';
           mpill.style.width = `${mWidth}px`;
-          const mScaleStr = isDragging ? ' scaleX(1.08) scaleY(1.12)' : '';
-          mpill.style.transform = `perspective(700px) translate3d(${mLeft}px, 0, 0)${mScaleStr}`;
+          const mScaleStr = isDragging ? ' scaleX(1.08) scaleY(1.16)' : '';
+          mpill.style.transform = `translate3d(${mLeft}px, 0, 0)${mScaleStr}`;
         }
       }
     }
 
     function initLiquidGlassNavDrag() {
-      const views = ['dashboard', 'practice', 'flashcard', 'wrong', 'exam'];
-
       function bindContinuousLiquidTrack(containerId, pillId, btnPrefix) {
         const track = document.getElementById(containerId);
         const pill = document.getElementById(pillId);
@@ -3041,7 +3322,6 @@
         let isPointerDown = false;
         let isDragging = false;
         let startClientX = 0;
-        let lastClientX = 0;
         let previewTab = activeTab;
         let holdTimer = null;
 
@@ -3049,49 +3329,34 @@
           if (!track.getBoundingClientRect) return;
           const trackRect = track.getBoundingClientRect();
           const currentBtn = document.getElementById(btnPrefix + previewTab) || document.getElementById(btnPrefix + activeTab);
-          const pillW = (currentBtn && currentBtn.offsetWidth) ? currentBtn.offsetWidth : 95;
+          const pillW = (currentBtn && currentBtn.offsetWidth) ? currentBtn.offsetWidth : 78;
 
-          // Auto-scroll mobile nav bar when dragging near left/right edges
-          if (track.scrollWidth > trackRect.width) {
-            if (clientX - trackRect.left < 42) {
-              track.scrollLeft = Math.max(0, (track.scrollLeft || 0) - 8);
-            } else if (trackRect.right - clientX < 42) {
-              track.scrollLeft = (track.scrollLeft || 0) + 8;
-            }
-          }
+          const rawX = clientX - trackRect.left - (pillW / 2);
+          const maxX = Math.max(0, (trackRect.width || 360) - pillW - 3);
+          const clampedX = Math.max(3, Math.min(maxX, rawX));
 
-          // Compute exact local X inside track so the 3D Liquid Glass droplet centers smoothly on the user's finger/mouse
-          const rawX = clientX - trackRect.left + (track.scrollLeft || 0) - (pillW / 2);
-          const maxX = Math.max(0, (track.scrollWidth || trackRect.width || 600) - pillW - 4);
-          const clampedX = Math.max(4, Math.min(maxX, rawX));
+          navSpringState.isDragging = true;
+          navSpringState.targetX = clampedX;
+          navSpringState.targetW = pillW;
+          startNavSpringLoop();
 
-          // Calculate movement velocity for 3D banking tilt + organic liquid stretch
-          const vx = clientX - lastClientX;
-          lastClientX = clientX;
-          const stretchX = Math.min(1.18, 1.05 + Math.min(Math.abs(vx) * 0.004, 0.13));
-          const squashY = Math.max(0.94, 1.08 - Math.min(Math.abs(vx) * 0.002, 0.10));
-          const tiltY = Math.max(-20, Math.min(20, vx * 1.15));
-
-          pill.style.width = `${pillW}px`;
-          pill.style.transform = `translate3d(${clampedX.toFixed(1)}px, 0, 0) scaleX(${stretchX.toFixed(3)}) scaleY(${squashY.toFixed(3)})`;
-
-          // Find which tab button is closest to the finger/cursor
+          // Track which tab the droplet is currently hovering over
           let bestTab = null;
           let bestDist = Infinity;
-          for (const v of views) {
+          const dropletScreenX = trackRect.left + navSpringState.x + (navSpringState.w / 2);
+          for (const v of NAV_VIEWS) {
             const btn = document.getElementById(btnPrefix + v);
             if (!btn || !btn.getBoundingClientRect) continue;
             const r = btn.getBoundingClientRect();
             const center = (r.left + r.right) / 2;
-            const dist = Math.abs(clientX - center);
+            const dist = Math.abs(dropletScreenX - center);
             if (dist < bestDist) {
               bestDist = dist;
               bestTab = v;
             }
           }
-          if (bestTab && bestTab !== previewTab) {
+          if (bestTab) {
             previewTab = bestTab;
-            switchTab(bestTab, true);
           }
         }
 
@@ -3099,21 +3364,23 @@
           isPointerDown = true;
           isDragging = false;
           startClientX = e.clientX || 0;
-          lastClientX = startClientX;
           previewTab = activeTab;
           clearTimeout(holdTimer);
-          // Only inflate droplet in 3D on long-hold (>= 160ms) WITHOUT jumping position on a quick tap!
           holdTimer = setTimeout(() => {
             if (isPointerDown && !isDragging) {
-              updateLiquidNavPill(activeTab, true);
+              navSpringState.isDragging = true;
+              navSpringState.targetX = navSpringState.x;
+              navSpringState.targetW = navSpringState.w;
+              track.classList.add('is-dragging-glass');
+              startNavSpringLoop();
             }
-          }, 160);
+          }, 180);
         }, { passive: true });
 
         window.addEventListener('pointermove', e => {
           if (!isPointerDown || e.clientX === undefined) return;
           const distFromStart = Math.abs(e.clientX - startClientX);
-          if (!isDragging && distFromStart >= 6) {
+          if (!isDragging && distFromStart >= 12) {
             isDragging = true;
             clearTimeout(holdTimer);
             track.classList.add('is-dragging-glass');
@@ -3126,11 +3393,16 @@
         const endHold = () => {
           if (!isPointerDown) return;
           clearTimeout(holdTimer);
-          const wasDragging = isDragging;
+          const wasRealDrag = isDragging;
+          const wasHold = navSpringState.isDragging;
           isPointerDown = false;
           isDragging = false;
+          navSpringState.isDragging = false;
           track.classList.remove('is-dragging-glass');
-          if (wasDragging) {
+          if (wasRealDrag && previewTab) {
+            // Switch to the tab where the finger/mouse released and softly glide the droplet into place
+            switchTab(previewTab, false);
+          } else if (wasHold) {
             updateLiquidNavPill(activeTab, false);
           }
         };
@@ -3171,17 +3443,9 @@
       }, { passive: true });
 
       document.addEventListener('touchmove', e => {
-        if (!isSwipingCard || !e.touches || e.touches.length !== 1 || appState.prefs.lowSpecMode) return;
-        const dx = e.touches[0].clientX - touchStartX;
-        const dy = e.touches[0].clientY - touchStartY;
-        // Only apply live 3D card tilt-follow when horizontal movement dominates vertical scroll
-        if (Math.abs(dx) > 14 && Math.abs(dx) > Math.abs(dy) * 1.25 && activeCardEl && activeCardEl.style) {
-          const clampedDx = Math.max(-95, Math.min(95, dx * 0.36));
-          const rotY = Math.max(-11, Math.min(11, dx * 0.065));
-          const tz = -Math.min(45, Math.abs(dx) * 0.25);
-          activeCardEl.style.transition = 'transform 0.05s linear';
-          activeCardEl.style.transform = `perspective(1200px) translate3d(${clampedDx.toFixed(1)}px, 0, ${tz.toFixed(1)}px) rotateY(${rotY.toFixed(2)}deg)`;
-        }
+        // Keep page & cards strictly fixed horizontally on mobile; do not shift card X during touch scroll
+        if (document.documentElement.scrollLeft !== 0) document.documentElement.scrollLeft = 0;
+        if (document.body.scrollLeft !== 0) document.body.scrollLeft = 0;
       }, { passive: true });
 
       document.addEventListener('touchend', e => {
@@ -3279,11 +3543,7 @@
 
         const navBtn = document.getElementById('nav-' + v);
         if (navBtn) {
-          if (v === tabName) {
-            navBtn.className = 'nav-tab-btn px-3.5 py-1.5 rounded-lg text-xs font-extrabold flex items-center gap-1.5 whitespace-nowrap shrink-0 text-[#163827]';
-          } else {
-            navBtn.className = 'nav-tab-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 whitespace-nowrap shrink-0 text-cream-100/90 hover:text-white';
-          }
+          navBtn.className = 'nav-tab-btn px-1 sm:px-4 py-1.5 sm:py-2 rounded-full text-[10px] sm:text-xs font-bold flex flex-col sm:flex-row items-center justify-center gap-0.5 sm:gap-1.5 whitespace-nowrap min-w-0 relative';
         }
 
         const mnavBtn = document.getElementById('mnav-' + v);
@@ -3304,7 +3564,9 @@
       if (tabName === 'flashcard') renderFlashcardView();
       if (tabName === 'wrong') renderWrongView();
       if (tabName === 'exam') renderExamSection();
-      window.scrollTo({ top: 0, behavior: appState.prefs.lowSpecMode ? 'auto' : 'smooth' });
+      if (!isDragging && window.scrollY > 80) {
+        window.scrollTo({ top: 0, behavior: appState.prefs.lowSpecMode ? 'auto' : 'smooth' });
+      }
     }
 
     function updateGlobalBadges() {
@@ -3476,12 +3738,120 @@
           return (aDone - bDone) || (a.id - b.id);
         });
       } else if (orderVal === 'random') {
-        filtered = [...filtered].sort(() => Math.random() - 0.5);
+        filtered = shuffleArray(filtered);
       }
+
+      appState.prefs.shuffleQuestions = (orderVal === 'random');
+      saveState();
+      syncShuffleUIControls();
 
       practiceList = filtered;
       practiceIndex = 0;
       renderPracticeView();
+    }
+
+    function syncShuffleUIControls() {
+      const sqEl = document.getElementById('toggle-shuffle-questions');
+      const soEl = document.getElementById('toggle-shuffle-options');
+      const wsoEl = document.getElementById('toggle-wrong-shuffle-opt');
+      const statusEl = document.getElementById('shuffle-status-text');
+      const pillEl = document.getElementById('shuffle-active-pill');
+
+      const isQ = !!appState.prefs.shuffleQuestions;
+      const isO = !!appState.prefs.shuffleOptions;
+
+      if (sqEl) sqEl.checked = isQ;
+      if (soEl) soEl.checked = isO;
+      if (wsoEl) wsoEl.checked = isO;
+
+      if (statusEl && pillEl) {
+        if (isQ && isO) {
+          statusEl.textContent = '🔀 Đang bật: Đảo câu + Đảo đáp án';
+          pillEl.className = 'hidden sm:inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-emerald-100 border border-emerald-300 text-emerald-900 text-[11px] font-bold';
+        } else if (isQ) {
+          statusEl.textContent = '🔀 Đang bật: Đảo câu hỏi';
+          pillEl.className = 'hidden sm:inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-forest-50 border border-forest-200 text-forest-800 text-[11px] font-bold';
+        } else if (isO) {
+          statusEl.textContent = '🔀 Đang bật: Đảo đáp án A–D';
+          pillEl.className = 'hidden sm:inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-amber-50 border border-amber-300 text-amber-900 text-[11px] font-bold';
+        } else {
+          statusEl.textContent = 'Thứ tự câu & đáp án chuẩn';
+          pillEl.className = 'hidden sm:inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-cream-100 border border-[#DFD3C0] text-walnut-700 text-[11px] font-semibold';
+        }
+      }
+    }
+
+    function toggleShuffleQuestionsFromUI(checked) {
+      appState.prefs.shuffleQuestions = !!checked;
+      const orderSelect = document.getElementById('filter-order');
+      if (orderSelect) {
+        orderSelect.value = checked ? 'random' : 'sequential';
+      }
+      applyPracticeFilters();
+      triggerCardSlideAnimation('practice-question-card', 1);
+      showToast(checked ? '🔀 Đã bật Đảo ngẫu nhiên thứ tự câu hỏi!' : '📋 Đã khôi phục thứ tự câu hỏi chuẩn (1 → 200)');
+    }
+
+    function toggleShuffleOptionsFromUI(checked) {
+      appState.prefs.shuffleOptions = !!checked;
+      if (checked) {
+        generateAllOptionPermutations();
+      } else {
+        optionPermutations = {};
+      }
+      saveState();
+      syncShuffleUIControls();
+      renderPracticeView();
+      renderWrongView();
+      renderFlashcardView();
+      showToast(checked ? '🔀 Đã bật Đảo vị trí đáp án A, B, C, D!' : '🔤 Đã khôi phục vị trí đáp án A, B, C, D gốc');
+    }
+
+    function reshufflePracticeNow() {
+      cancelAutoSkip();
+      if (!appState.prefs.shuffleQuestions && !appState.prefs.shuffleOptions) {
+        appState.prefs.shuffleQuestions = true;
+        appState.prefs.shuffleOptions = true;
+        const orderSelect = document.getElementById('filter-order');
+        if (orderSelect) orderSelect.value = 'random';
+      }
+      if (appState.prefs.shuffleOptions) {
+        generateAllOptionPermutations();
+      }
+      if (appState.prefs.shuffleQuestions) {
+        practiceList = shuffleArray(practiceList);
+        practiceIndex = 0;
+      }
+      saveState();
+      syncLiquidSelects();
+      syncShuffleUIControls();
+      triggerCardSlideAnimation('practice-question-card', 1);
+      renderPracticeView();
+      showToast('🔄 Đã trộn lượt câu hỏi & vị trí đáp án A–D mới!');
+    }
+
+    function shuffleWrongQuestionsNow() {
+      if (appState.wrongSet.length <= 1) {
+        showToast('Cần ít nhất 2 câu sai để trộn thứ tự!');
+        return;
+      }
+      appState.wrongSet = shuffleArray(appState.wrongSet);
+      if (appState.prefs.shuffleOptions) {
+        generateAllOptionPermutations();
+      }
+      wrongIndex = 0;
+      saveState();
+      triggerCardSlideAnimation('wrong-question-card', 1);
+      renderWrongView();
+      showToast('🔀 Đã đảo ngẫu nhiên danh sách câu sai!');
+    }
+
+    function updateExamShufflePrefs() {
+      const qChk = document.getElementById('toggle-exam-shuffle-q');
+      const oChk = document.getElementById('toggle-exam-shuffle-opt');
+      if (qChk) appState.prefs.examShuffleQuestions = qChk.checked;
+      if (oChk) appState.prefs.examShuffleOptions = oChk.checked;
+      saveState();
     }
 
     function triggerCardSlideAnimation(cardId, direction) {
@@ -3529,8 +3899,8 @@
       if (bmBtn) {
         bmBtn.textContent = isBookmarked ? '★ Đã ghim câu khó' : '☆ Ghim câu khó';
         bmBtn.className = isBookmarked
-          ? 'px-2.5 py-1 rounded-lg text-xs font-bold border border-amber-500 bg-amber-100 text-amber-900 transition'
-          : 'px-2.5 py-1 rounded-lg text-xs font-bold border border-[#D4C0A5] bg-cream-50 text-walnut-800 hover:bg-amber-50 transition';
+          ? 'px-2.5 py-1 rounded-lg text-[11px] sm:text-xs font-bold border border-amber-500 bg-amber-100 text-amber-900 transition whitespace-nowrap'
+          : 'px-2.5 py-1 rounded-lg text-[11px] sm:text-xs font-bold border border-[#D4C0A5] bg-cream-50 text-walnut-800 hover:bg-amber-50 transition whitespace-nowrap';
       }
 
       document.getElementById('pq-number-badge').textContent = `Câu ${q.id} (${practiceIndex + 1}/${practiceList.length})`;
@@ -3540,35 +3910,38 @@
       const statusPill = document.getElementById('pq-status-pill');
       if (!userChoice) {
         statusPill.textContent = 'Chưa làm';
-        statusPill.className = 'text-xs font-semibold px-2.5 py-1 rounded-full bg-cream-200 text-walnut-700';
+        statusPill.className = 'text-[11px] sm:text-xs font-semibold px-2.5 py-1 rounded-full bg-cream-200 text-walnut-700 whitespace-nowrap';
       } else if (userChoice === q.answer) {
         statusPill.textContent = '✓ Đã trả lời Đúng';
-        statusPill.className = 'text-xs font-bold px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800';
+        statusPill.className = 'text-[11px] sm:text-xs font-bold px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 whitespace-nowrap';
       } else {
         statusPill.textContent = '✗ Đã trả lời Sai';
-        statusPill.className = 'text-xs font-bold px-2.5 py-1 rounded-full bg-red-100 text-[#B93829]';
+        statusPill.className = 'text-[11px] sm:text-xs font-bold px-2.5 py-1 rounded-full bg-red-100 text-[#B93829] whitespace-nowrap';
       }
 
       document.getElementById('pq-stem').innerHTML = `Câu ${q.id}: ${formatStemWithHighlight(q.question)}`;
 
+      const perm = getOptionOrder(q.id);
+
       // Render 4 options with subtle staggered animation
-      const optsHtml = ['a', 'b', 'c', 'd'].map((key, idx) => {
-        const text = q.options[key];
+      const optsHtml = perm.map((origKey, idx) => {
+        const dispKey = DISPLAY_KEYS[idx];
+        const text = q.options[origKey];
         let btnStyle = 'bg-[#FDFBF7] hover:bg-[#F3ECE0] border-[#D8CBB8] text-[#26180F]';
         let badgeStyle = 'bg-[#EAE0CE] text-walnut-800 border border-[#D0C0A8]';
         let rightIcon = '';
         let animCls = !userChoice ? `stagger-opt-${idx}` : '';
 
-        if (!userChoice && hiddenBy5050.includes(key)) {
+        if (!userChoice && hiddenBy5050.includes(origKey)) {
           btnStyle = 'bg-cream-100/40 border-dashed border-[#D8CBB8] text-walnut-400 line-through opacity-45';
           rightIcon = '<span class="ml-auto text-[11px] font-semibold text-walnut-500 shrink-0">Đã loại (50/50)</span>';
         } else if (userChoice) {
-          if (key === q.answer) {
+          if (origKey === q.answer) {
             btnStyle = 'bg-[#E6F4ED] border-[#2E7D56] text-[#143D29] font-semibold shadow-sm';
             badgeStyle = 'bg-[#2E7D56] text-white';
             rightIcon = '<span class="ml-auto text-emerald-700 font-bold text-xs shrink-0">✓ Đáp án đúng</span>';
             if (feedbackType === 'correct') animCls = 'correct-bounce';
-          } else if (key === userChoice && userChoice !== q.answer) {
+          } else if (origKey === userChoice && userChoice !== q.answer) {
             btnStyle = 'bg-[#FCECE9] border-[#C93B2B] text-[#6E1B12] font-semibold';
             badgeStyle = 'bg-[#C93B2B] text-white';
             rightIcon = '<span class="ml-auto text-[#B93829] font-bold text-xs shrink-0">✗ Bạn chọn sai</span>';
@@ -3579,9 +3952,9 @@
         }
 
         return `
-          <button onclick="selectPracticeOption('${key}')" class="option-btn ${animCls} w-full text-left p-3.5 sm:p-4 rounded-xl border ${btnStyle} flex items-start gap-3">
+          <button onclick="selectPracticeOption('${origKey}')" class="option-btn ${animCls} w-full text-left p-3.5 sm:p-4 rounded-xl border ${btnStyle} flex items-start gap-3">
             <span class="w-7 h-7 rounded-lg ${badgeStyle} font-bold text-xs uppercase flex items-center justify-center shrink-0 mt-0.5">
-              ${key}
+              ${dispKey}
             </span>
             <span class="text-xs sm:text-sm vn-body-text flex-1">${text}</span>
             ${rightIcon}
@@ -3594,6 +3967,7 @@
       const expBox = document.getElementById('pq-explanation-box');
       if (userChoice) {
         const isCorrect = userChoice === q.answer;
+        const dispCorrect = getDisplayLetter(q.answer, perm);
         expBox.classList.remove('hidden');
         expBox.className = isCorrect
           ? 'mt-5 rounded-2xl p-4 sm:p-5 border bg-[#EBF7F0] border-[#84C5A2] pop-scale space-y-4'
@@ -3611,14 +3985,14 @@
           ? 'text-sm font-bold text-emerald-900 vn-heading'
           : 'text-sm font-bold text-[#8C2318] vn-heading';
 
-        document.getElementById('pq-exp-correct-ans').textContent = `Đáp án đúng: ${q.answer.toUpperCase()}`;
+        document.getElementById('pq-exp-correct-ans').textContent = `Đáp án đúng: ${dispCorrect}`;
         document.getElementById('pq-exp-correct-ans').className = isCorrect
           ? 'text-xs font-bold px-2.5 py-0.5 rounded-md bg-emerald-200 text-emerald-900'
           : 'text-xs font-bold px-2.5 py-0.5 rounded-md bg-red-200 text-red-900';
 
-        const mnEl = document.getElementById('pq-exp-mnemonic'); if (mnEl) mnEl.textContent = `⚡ ${q.mnemonicTip || ''}`;
-        document.getElementById('pq-exp-text').textContent = q.explanation;
-        document.getElementById('pq-exp-options-breakdown').innerHTML = buildOptionsBreakdownHtml(q, userChoice);
+        const mnEl = document.getElementById('pq-exp-mnemonic'); if (mnEl) mnEl.textContent = `⚡ ${remapExplanationLetters(q.mnemonicTip || '', perm)}`;
+        document.getElementById('pq-exp-text').textContent = remapExplanationLetters(q.explanation, perm);
+        document.getElementById('pq-exp-options-breakdown').innerHTML = buildOptionsBreakdownHtml(q, userChoice, perm);
         document.getElementById('pq-exp-takeaway').innerHTML = `<strong class="text-forest-800">Trọng tâm kiến thức cần nhớ:</strong> ${q.keyTakeaway || ''}`;
       } else {
         expBox.classList.add('hidden');
@@ -3713,11 +4087,13 @@
         showToast('Câu này đã có đáp án bên dưới!');
         return;
       }
+      const perm = getOptionOrder(q.id);
       const wrongOpts = ['a', 'b', 'c', 'd'].filter(k => k !== q.answer);
-      const shuffledWrong = wrongOpts.sort(() => Math.random() - 0.5).slice(0, 2);
+      const shuffledWrong = shuffleArray(wrongOpts).slice(0, 2);
       eliminatedHints[q.id] = shuffledWrong;
       renderPracticeView();
-      showToast(`💡 Gợi ý 50/50: Đã loại trừ 2 phương án nhiễu (${shuffledWrong.map(x => x.toUpperCase()).join(', ')})!`);
+      const dispEliminated = shuffledWrong.map(x => getDisplayLetter(x, perm)).sort();
+      showToast(`💡 Gợi ý 50/50: Đã loại trừ 2 phương án nhiễu (${dispEliminated.join(', ')})!`);
     }
 
     function applyFlashcardFilter() {
@@ -3796,12 +4172,14 @@
         st.className = 'px-2.5 py-0.5 rounded-full bg-cream-200 text-walnut-800';
       }
 
+      const perm = getOptionOrder(q.id);
+      const dispAns = getDisplayLetter(q.answer, perm);
       document.getElementById('fc-front-meta').textContent = `Câu ${q.id} • Chương ${q.chapterId} • ${q.levelName}`;
       document.getElementById('fc-front-question').innerHTML = formatStemWithHighlight(q.question);
-      document.getElementById('fc-back-ans-badge').textContent = `ĐÁP ÁN ĐÚNG: ${q.answer.toUpperCase()}`;
-      document.getElementById('fc-back-option-text').textContent = `${q.answer.toUpperCase()}. ${q.options[q.answer]}`;
-      document.getElementById('fc-back-mnemonic').textContent = `⚡ ${q.mnemonicTip || ''}`;
-      document.getElementById('fc-back-explanation').textContent = `💡 Giải thích: ${q.explanation}`;
+      document.getElementById('fc-back-ans-badge').textContent = `ĐÁP ÁN ĐÚNG: ${dispAns}`;
+      document.getElementById('fc-back-option-text').textContent = `${dispAns}. ${q.options[q.answer]}`;
+      document.getElementById('fc-back-mnemonic').textContent = `⚡ ${remapExplanationLetters(q.mnemonicTip || '', perm)}`;
+      document.getElementById('fc-back-explanation').textContent = `💡 Giải thích: ${remapExplanationLetters(q.explanation, perm)}`;
       document.getElementById('fc-back-takeaway').textContent = `📌 ${q.keyTakeaway || ''}`;
     }
 
@@ -3810,9 +4188,13 @@
       if (practiceList.length === 0) return;
       const q = practiceList[practiceIndex];
       delete appState.answered[q.id];
+      delete eliminatedHints[q.id];
+      if (appState.prefs.shuffleOptions) {
+        optionPermutations[q.id] = shuffleArray(DISPLAY_KEYS);
+      }
       saveState();
       renderPracticeView();
-      showToast(`Đã đặt lại Câu ${q.id} để bạn làm lại`);
+      showToast(`Đã đặt lại Câu ${q.id}${appState.prefs.shuffleOptions ? ' (kèm đảo lại đáp án)' : ''} để bạn làm lại`);
     }
 
     function resetFilteredPracticeQuestions() {
@@ -3887,25 +4269,27 @@
       if (!q) return;
 
       const tempChoice = wrongTempChoice[q.id];
+      const perm = getOptionOrder(q.id);
 
       document.getElementById('wq-index-badge').textContent = `Câu sai ${wrongIndex + 1} / ${wrongIds.length}`;
       document.getElementById('wq-orig-id').textContent = `Câu #${q.id} • Chương ${q.chapterId}`;
       document.getElementById('wq-level-badge').textContent = q.levelName;
       document.getElementById('wq-stem').textContent = `Câu ${q.id}: ${q.question}`;
 
-      const optsHtml = ['a', 'b', 'c', 'd'].map(key => {
+      const optsHtml = perm.map((origKey, idx) => {
+        const dispKey = DISPLAY_KEYS[idx];
         let btnStyle = 'bg-[#FDFBF7] hover:bg-[#F3ECE0] border-[#D8CBB8] text-[#26180F]';
         let badgeStyle = 'bg-[#EAE0CE] text-walnut-800';
         let statusTag = '';
         let animCls = '';
 
         if (tempChoice) {
-          if (key === q.answer) {
+          if (origKey === q.answer) {
             btnStyle = 'bg-[#E6F4ED] border-[#2E7D56] text-[#143D29] font-semibold';
             badgeStyle = 'bg-[#2E7D56] text-white';
             statusTag = '<span class="ml-auto text-xs font-bold text-emerald-700">✓ Đáp án đúng</span>';
             if (feedbackType === 'correct') animCls = 'correct-bounce';
-          } else if (key === tempChoice && tempChoice !== q.answer) {
+          } else if (origKey === tempChoice && tempChoice !== q.answer) {
             btnStyle = 'bg-[#FCECE9] border-[#C93B2B] text-[#6E1B12] font-semibold';
             badgeStyle = 'bg-[#C93B2B] text-white';
             statusTag = '<span class="ml-auto text-xs font-bold text-[#B93829]">✗ Vẫn sai</span>';
@@ -3914,9 +4298,9 @@
         }
 
         return `
-          <button onclick="selectWrongOption('${key}')" class="option-btn ${animCls} w-full text-left p-3.5 sm:p-4 rounded-xl border ${btnStyle} flex items-start gap-3">
-            <span class="w-7 h-7 rounded-lg ${badgeStyle} font-bold text-xs uppercase flex items-center justify-center shrink-0 mt-0.5">${key}</span>
-            <span class="text-xs sm:text-sm vn-body-text flex-1">${q.options[key]}</span>
+          <button onclick="selectWrongOption('${origKey}')" class="option-btn ${animCls} w-full text-left p-3.5 sm:p-4 rounded-xl border ${btnStyle} flex items-start gap-3">
+            <span class="w-7 h-7 rounded-lg ${badgeStyle} font-bold text-xs uppercase flex items-center justify-center shrink-0 mt-0.5">${dispKey}</span>
+            <span class="text-xs sm:text-sm vn-body-text flex-1">${q.options[origKey]}</span>
             ${statusTag}
           </button>
         `;
@@ -3926,6 +4310,7 @@
       const expBox = document.getElementById('wq-explanation-box');
       if (tempChoice) {
         const isCorrect = tempChoice === q.answer;
+        const dispCorrect = getDisplayLetter(q.answer, perm);
         expBox.classList.remove('hidden');
         expBox.className = isCorrect
           ? 'mt-4 rounded-2xl p-4 border bg-[#EBF7F0] border-[#84C5A2] pop-scale space-y-3'
@@ -3937,10 +4322,10 @@
         document.getElementById('wq-exp-title').textContent = isCorrect
           ? 'Tuyệt vời! Bạn đã trả lời đúng lại câu hỏi này:'
           : 'Hãy đọc kỹ giải thích & phân tích từng phương án dưới đây:';
-        document.getElementById('wq-exp-ans').textContent = `Đáp án đúng: ${q.answer.toUpperCase()}`;
-        const wmnEl = document.getElementById('wq-exp-mnemonic'); if (wmnEl) wmnEl.textContent = `⚡ ${q.mnemonicTip || ''}`;
-        document.getElementById('wq-exp-text').textContent = q.explanation;
-        document.getElementById('wq-exp-options-breakdown').innerHTML = buildOptionsBreakdownHtml(q, tempChoice);
+        document.getElementById('wq-exp-ans').textContent = `Đáp án đúng: ${dispCorrect}`;
+        const wmnEl = document.getElementById('wq-exp-mnemonic'); if (wmnEl) wmnEl.textContent = `⚡ ${remapExplanationLetters(q.mnemonicTip || '', perm)}`;
+        document.getElementById('wq-exp-text').textContent = remapExplanationLetters(q.explanation, perm);
+        document.getElementById('wq-exp-options-breakdown').innerHTML = buildOptionsBreakdownHtml(q, tempChoice, perm);
         document.getElementById('wq-exp-takeaway').innerHTML = `<strong class="text-forest-800">Trọng tâm kiến thức cần nhớ:</strong> ${q.keyTakeaway || ''}`;
       } else {
         expBox.classList.add('hidden');
@@ -4003,6 +4388,9 @@
       if (wrongIds.length === 0) return;
       const qId = wrongIds[wrongIndex];
       delete wrongTempChoice[qId];
+      if (appState.prefs.shuffleOptions) {
+        optionPermutations[qId] = shuffleArray(DISPLAY_KEYS);
+      }
       renderWrongView();
     }
 
@@ -4062,12 +4450,28 @@
     function startNewStandardExam() {
       if (currentExam.timerInterval) clearInterval(currentExam.timerInterval);
 
-      // Stratified sampling across 6 chapters (6 + 7 + 6 + 6 + 8 + 7 = 40 questions)
+      const shuffleExamQ = document.getElementById('toggle-exam-shuffle-q')
+        ? document.getElementById('toggle-exam-shuffle-q').checked
+        : (appState.prefs.examShuffleQuestions !== false);
+      const shuffleExamOpt = document.getElementById('toggle-exam-shuffle-opt')
+        ? document.getElementById('toggle-exam-shuffle-opt').checked
+        : (appState.prefs.examShuffleOptions !== false);
+
+      // Stratified sampling across 6 chapters (8 + 9 + 7 + 8 + 10 + 8 = 50 questions)
       let selected = [];
       CHAPTER_META.forEach(ch => {
         const pool = QUESTIONS_DATA.filter(q => q.chapterId === ch.id);
-        const shuffled = [...pool].sort(() => Math.random() - 0.5);
+        const shuffled = shuffleArray(pool);
         selected.push(...shuffled.slice(0, ch.examQuota));
+      });
+
+      if (shuffleExamQ) {
+        selected = shuffleArray(selected);
+      }
+
+      const examOptionOrders = {};
+      selected.forEach(q => {
+        examOptionOrders[q.id] = shuffleExamOpt ? shuffleArray(DISPLAY_KEYS) : [...DISPLAY_KEYS];
       });
 
       const minutes = Number(document.getElementById('exam-duration-select').value) || 50;
@@ -4075,6 +4479,7 @@
         active: true,
         submitted: false,
         questions: selected,
+        optionOrders: examOptionOrders,
         choices: {},
         flagged: {},
         currentIndex: 0,
@@ -4152,8 +4557,10 @@
       document.getElementById('eq-stem').textContent = `Câu ${currentExam.currentIndex + 1}: ${q.question}`;
 
       const chosen = currentExam.choices[q.id];
-      document.getElementById('eq-options').innerHTML = ['a', 'b', 'c', 'd'].map(key => {
-        const isSelected = chosen === key;
+      const perm = getExamOptionOrder(q.id);
+      document.getElementById('eq-options').innerHTML = perm.map((origKey, idx) => {
+        const dispKey = DISPLAY_KEYS[idx];
+        const isSelected = chosen === origKey;
         const btnCls = isSelected
           ? 'bg-forest-50 border-forest-600 text-forest-900 font-semibold shadow-sm correct-bounce'
           : 'bg-[#FDFBF7] hover:bg-[#F3ECE0] border-[#D8CBB8] text-[#26180F]';
@@ -4162,9 +4569,9 @@
           : 'bg-[#EAE0CE] text-walnut-800';
 
         return `
-          <button onclick="selectExamOption('${key}')" class="option-btn w-full text-left p-3.5 sm:p-4 rounded-xl border ${btnCls} flex items-start gap-3">
-            <span class="w-7 h-7 rounded-lg ${badgeCls} font-bold text-xs uppercase flex items-center justify-center shrink-0 mt-0.5">${key}</span>
-            <span class="text-xs sm:text-sm vn-body-text flex-1">${q.options[key]}</span>
+          <button onclick="selectExamOption('${origKey}')" class="option-btn w-full text-left p-3.5 sm:p-4 rounded-xl border ${btnCls} flex items-start gap-3">
+            <span class="w-7 h-7 rounded-lg ${badgeCls} font-bold text-xs uppercase flex items-center justify-center shrink-0 mt-0.5">${dispKey}</span>
+            <span class="text-xs sm:text-sm vn-body-text flex-1">${q.options[origKey]}</span>
           </button>
         `;
       }).join('');
@@ -4183,8 +4590,13 @@
           return `<button id="mstrip-btn-${idx}" onclick="jumpToExamQuestion(${idx})" class="w-7 h-7 rounded-lg text-[11px] shrink-0 flex items-center justify-center transition-all ${cls}">${idx + 1}</button>`;
         }).join('');
         const activeStripBtn = document.getElementById('mstrip-btn-' + currentExam.currentIndex);
-        if (activeStripBtn && typeof activeStripBtn.scrollIntoView === 'function') {
-          try { activeStripBtn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' }); } catch (e) {}
+        if (activeStripBtn && mobileStrip.scrollWidth > mobileStrip.clientWidth) {
+          const targetLeft = activeStripBtn.offsetLeft - (mobileStrip.clientWidth / 2) + (activeStripBtn.offsetWidth / 2);
+          try {
+            mobileStrip.scrollTo({ left: Math.max(0, targetLeft), behavior: 'smooth' });
+          } catch (e) {
+            mobileStrip.scrollLeft = Math.max(0, targetLeft);
+          }
         }
       }
 
@@ -4351,9 +4763,13 @@
         if (currentExam.reviewFilter === 'wrong' && isCorrect) return '';
         if (currentExam.reviewFilter === 'correct' && !isCorrect) return '';
 
+        const perm = getExamOptionOrder(q.id);
+        const dispUserChoice = userChoice ? getDisplayLetter(userChoice, perm) : '';
+        const dispCorrect = getDisplayLetter(q.answer, perm);
+
         const statusBadge = isCorrect
-          ? '<span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800">✓ Đúng</span>'
-          : `<span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-red-100 text-[#B93829]">✗ ${userChoice ? 'Chọn sai (' + userChoice.toUpperCase() + ')' : 'Chưa trả lời'}</span>`;
+          ? `<span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800">✓ Đúng (Chọn ${dispCorrect})</span>`
+          : `<span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-red-100 text-[#B93829]">✗ ${userChoice ? 'Chọn sai (' + dispUserChoice + ')' : 'Chưa trả lời'}</span>`;
 
         return `
           <div class="smooth-card rounded-2xl p-4 sm:p-5 space-y-3">
@@ -4366,11 +4782,11 @@
             </div>
             <p class="font-semibold text-sm sm:text-base text-walnut-900 vn-question-stem">${q.question}</p>
             <div class="p-3.5 rounded-xl bg-[#F4EFE6] border border-[#DED0BC] text-xs sm:text-sm text-walnut-900 space-y-2.5">
-              <div class="p-2.5 rounded-lg bg-amber-50 border border-amber-300 text-amber-950 font-bold text-xs">⚡ ${q.mnemonicTip || ''}</div>
-              <div class="vn-body-text"><strong class="text-forest-800">Giải thích trọng tâm (Đáp án ${q.answer.toUpperCase()}):</strong> ${q.explanation}</div>
+              <div class="p-2.5 rounded-lg bg-amber-50 border border-amber-300 text-amber-950 font-bold text-xs">⚡ ${remapExplanationLetters(q.mnemonicTip || '', perm)}</div>
+              <div class="vn-body-text"><strong class="text-forest-800">Giải thích trọng tâm (Đáp án ${dispCorrect}):</strong> ${remapExplanationLetters(q.explanation, perm)}</div>
               <div class="pt-2 border-t border-[#DED0BC] space-y-1.5">
                 <p class="text-[11px] font-bold uppercase text-walnut-700">Phân tích chi tiết từng phương án A, B, C, D:</p>
-                <div class="grid grid-cols-1 gap-1.5 text-xs">${buildOptionsBreakdownHtml(q, userChoice)}</div>
+                <div class="grid grid-cols-1 gap-1.5 text-xs">${buildOptionsBreakdownHtml(q, userChoice, perm)}</div>
               </div>
               <div class="text-xs text-walnut-700 pt-1 vn-body-text"><strong class="text-forest-800">Trọng tâm kiến thức:</strong> ${q.keyTakeaway || ''}</div>
             </div>
